@@ -8,11 +8,119 @@
       "data_encerramento": null,
       "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
       "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:00:17.786132",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:08:05.030440",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:15:55.770252",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:30:14.735807",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:44:42.060536",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:45:12.822911",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
     }
   ],
   "0056": [
     {
       "ts": "2026-05-26T14:46:51.650078",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:00:59.434110",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:08:53.099561",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:16:44.564753",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:30:51.775123",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:45:19.539464",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:45:51.329357",
       "lance_atual": 5150.0,
       "lance_inicial": 5150.0,
       "status": "desconhecido",
@@ -29,6 +137,158 @@
       "status": "desconhecido",
       "data_encerramento": null,
       "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:01:50.787627",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:09:38.409608",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:17:43.407144",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:31:47.060655",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:46:07.553732",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:46:40.370244",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    }
+  ],
+  "0065": [
+    {
+      "ts": "2026-05-26T14:48:29.689407",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:03:26.507352",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:10:29.020700",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:18:32.954293",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:32:41.123254",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:46:45.601423",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    },
+    {
+      "ts": "2026-05-26T15:47:24.736991",
+      "lance_atual": 5550.0,
+      "lance_inicial": 5550.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/6d5e4c3f\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/6d5e4c3f\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    }
+  ],
+  "4414-BROTAS-0002": [
+    {
+      "ts": "2026-05-26T15:46:58.077667",
+      "lance_atual": 350.0,
+      "lance_inicial": 350.0,
+      "status": "desconhecido",
+      "data_encerramento": "17 jun 10",
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: VERMELHA](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n3 fotos\\n\\nprev\\n\\nnext\\n\\n##### Lote 0002: H/HONDA CG 125 TODAY, 92/92\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** BFX\\\\*\\\\*\\\\*\\\\*1/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*574\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*057342\\n\\n**INFORMAÇÕES ADICIONAIS:**\\n\\nIDENTIFICAÇÃO DO MOTOR INSTALADO NO VEICULO, ESTÁ COM O CADASTRO PARCIAL,QUALQUER CUSTO COM REGULARIZAÇÃO E/OU A TROCA, SERÁ DE INTEIRA RESPONSABILIDADE DO ARREMATANTE.\\n\\nOnde vis",
+      "erro": null
+    }
+  ],
+  "4585-CAIEIRAS-0817": [
+    {
+      "ts": "2026-05-26T15:47:10.733221",
+      "lance_atual": 6050.0,
+      "lance_inicial": 6050.0,
+      "status": "desconhecido",
+      "data_encerramento": "26 set 09",
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n![COR: AZUL](https://sspark.genspark.ai/cfimages?u1=wybzrzUdxc4eLS4czz64X%2B5J3JSfn7QoveIi1Cd9ijCQtM760jHoMsDDGiUfxXXFJeNjFnN7ISKgLEELM3D%2F8qZo67BIZnc2Ey%2FH&u2=mx4MINJfKBxhgNDi&width=1024)\\n\\n3 fotos\\n\\nprev\\n\\nnext\\n\\n##### Lote 0817: HONDA/XRE 190, 20/21\\n\\nFechamento:26 set 09:00h\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 6.050,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 150,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\\n\\n**NESTA DATA SERÃO LEILOADOS APENAS LOTES CONSERVADOS / COM DIREITO A DOCUMENTO**\\n\\n",
+      "erro": null
+    }
+  ],
+  "4585-CAIEIRAS-0056": [
+    {
+      "ts": "2026-05-26T15:47:28.170916",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0056: HONDA/CG 160 FAN, 21/21\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** GAF\\\\*\\\\*\\\\*\\\\*8/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*026\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*059086\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.150,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
       "erro": null
     }
   ]
