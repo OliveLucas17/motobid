@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.env
+data/state.json
+data/history.json
+data/alertas.json
+data/email_queue.json
+logs/
