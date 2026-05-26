@@ -1,0 +1,35 @@
+{
+  "0054": [
+    {
+      "ts": "2026-05-26T14:45:40.657674",
+      "lance_atual": 5800.0,
+      "lance_inicial": 5800.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0054: HONDA/CG 160 START, 24/24\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** SWB\\\\*\\\\*\\\\*\\\\*0/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*109\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*049314\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.800,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    }
+  ],
+  "0056": [
+    {
+      "ts": "2026-05-26T14:46:51.650078",
+      "lance_atual": 5150.0,
+      "lance_inicial": 5150.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/4b3c2a1d\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/4b3c2a1d\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    }
+  ],
+  "0059": [
+    {
+      "ts": "2026-05-26T14:47:40.394317",
+      "lance_atual": 3300.0,
+      "lance_inicial": 3300.0,
+      "status": "desconhecido",
+      "data_encerramento": null,
+      "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"No content found or crawler failed for https://www.sumareleiloes.com.br/lotes/5c4d3b2e\\nError: Error fetching URL https://www.sumareleiloes.com.br/lotes/5c4d3b2e\"\n  },\n  \"session_state\": null\n}\n",
+      "erro": null
+    }
+  ]
+}
