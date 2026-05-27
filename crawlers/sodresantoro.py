@@ -222,7 +222,7 @@ def parse_leilao(html, url_leilao, slug='sodresantoro'):
         log(f'    OK {lote_id} | {modelo} {ano_str} | '
             f'R${lance:.0f} | margem R${margem:.0f} | '
             f'{categoria} | {sin_tipo or ""} | score {score}')
-
+    return lotes
 
 
 

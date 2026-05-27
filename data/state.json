@@ -17,7 +17,7 @@
     "score": 9.5,
     "url_lote": "https://www.sumareleiloes.com.br/lotes/a2d784ba-42d8-4364-8d70-5df8f9a3e852",
     "added_at": "2026-05-25T00:00:00",
-    "last_check": "2026-05-27T11:30:17.337046",
+    "last_check": "2026-05-27T15:30:04.871327",
     "status": "desconhecido",
     "crawl_ok": true
   },
@@ -39,7 +39,7 @@
     "score": 9.0,
     "url_lote": "https://www.sumareleiloes.com.br/lotes/fb99a7d3-0cf9-43ac-b66b-e043e648e6cc",
     "added_at": "2026-05-25T00:00:00",
-    "last_check": "2026-05-27T11:30:32.294877",
+    "last_check": "2026-05-27T15:30:07.770273",
     "status": "desconhecido",
     "crawl_ok": true
   },
@@ -61,7 +61,7 @@
     "score": 9.5,
     "url_lote": "https://www.sumareleiloes.com.br/lotes/52c0f388-4e66-4855-af92-7aedd5cd26ae",
     "added_at": "2026-05-25T00:00:00",
-    "last_check": "2026-05-27T11:30:45.753550",
+    "last_check": "2026-05-27T15:30:10.532506",
     "status": "desconhecido",
     "crawl_ok": true
   },
@@ -74,7 +74,7 @@
     "tier": "TOP",
     "doc_ok": true,
     "lance_inicial": 4200.0,
-    "lance_atual": 4200.0,
+    "lance_atual": 4650.0,
     "fipe": 12000,
     "fipe_fonte": "fallback_marca",
     "margem_estimada": 7800.0,
@@ -84,9 +84,9 @@
     "site": "sumare",
     "url_lote": "https://www.sumareleiloes.com.br/lotes/04aa93ec-09e8-4efc-ae33-17a83e99dea3",
     "status": "ativo",
-    "fase": "pre_leilao",
+    "fase": "disputa",
     "added_at": "2026-05-27T00:04:07.460792",
-    "last_check": "2026-05-27T11:31:00.756992",
+    "last_check": "2026-05-27T15:30:13.393674",
     "crawl_ok": true
   },
   "5105-0054": {
@@ -110,7 +110,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:04:07.461294",
-    "last_check": "2026-05-27T11:31:15.122282",
+    "last_check": "2026-05-27T15:30:16.216069",
     "crawl_ok": true
   },
   "5105-0065": {
@@ -134,7 +134,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:04:07.461544",
-    "last_check": "2026-05-27T11:31:30.457926",
+    "last_check": "2026-05-27T15:30:19.104218",
     "crawl_ok": true
   },
   "1875-0005": {
@@ -158,7 +158,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.666923",
-    "last_check": "2026-05-27T11:31:46.765314",
+    "last_check": "2026-05-27T15:30:22.026012",
     "crawl_ok": true
   },
   "1875-0009": {
@@ -182,7 +182,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.667365",
-    "last_check": "2026-05-27T11:31:58.978995",
+    "last_check": "2026-05-27T15:30:24.930360",
     "crawl_ok": true
   },
   "1875-0015": {
@@ -206,7 +206,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.667657",
-    "last_check": "2026-05-27T11:32:11.358588",
+    "last_check": "2026-05-27T15:30:27.838553",
     "crawl_ok": true
   },
   "1875-0017": {
@@ -230,7 +230,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.667888",
-    "last_check": "2026-05-27T11:32:27.146867",
+    "last_check": "2026-05-27T15:30:30.758238",
     "crawl_ok": true
   },
   "1875-0019": {
@@ -254,7 +254,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.668117",
-    "last_check": "2026-05-27T11:32:41.113990",
+    "last_check": "2026-05-27T15:30:33.766715",
     "crawl_ok": true
   },
   "1875-0025": {
@@ -278,7 +278,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.668330",
-    "last_check": "2026-05-27T11:32:56.062617",
+    "last_check": "2026-05-27T15:30:36.657721",
     "crawl_ok": true
   },
   "1875-0027": {
@@ -302,7 +302,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.668541",
-    "last_check": "2026-05-27T11:33:07.866863",
+    "last_check": "2026-05-27T15:30:39.582975",
     "crawl_ok": true
   },
   "1875-0030": {
@@ -326,7 +326,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.668738",
-    "last_check": "2026-05-27T11:33:22.519948",
+    "last_check": "2026-05-27T15:30:42.500068",
     "crawl_ok": true
   },
   "1875-0031": {
@@ -350,7 +350,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.668958",
-    "last_check": "2026-05-27T11:33:36.880990",
+    "last_check": "2026-05-27T15:30:45.424223",
     "crawl_ok": true
   },
   "1875-0035": {
@@ -374,7 +374,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.669173",
-    "last_check": "2026-05-27T11:33:52.113276",
+    "last_check": "2026-05-27T15:30:48.320710",
     "crawl_ok": true
   },
   "1875-0037": {
@@ -398,7 +398,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.669394",
-    "last_check": "2026-05-27T11:34:06.839481",
+    "last_check": "2026-05-27T15:30:51.224541",
     "crawl_ok": true
   },
   "1875-0041": {
@@ -422,7 +422,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.669606",
-    "last_check": "2026-05-27T11:34:22.160244",
+    "last_check": "2026-05-27T15:30:54.120627",
     "crawl_ok": true
   },
   "1875-0045": {
@@ -446,7 +446,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.669833",
-    "last_check": "2026-05-27T11:34:37.682291",
+    "last_check": "2026-05-27T15:30:57.020246",
     "crawl_ok": true
   },
   "1875-0050": {
@@ -470,7 +470,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.670066",
-    "last_check": "2026-05-27T11:34:52.502046",
+    "last_check": "2026-05-27T15:30:59.975527",
     "crawl_ok": true
   },
   "1875-0055": {
@@ -494,7 +494,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.670268",
-    "last_check": "2026-05-27T11:35:06.716384",
+    "last_check": "2026-05-27T15:31:02.933521",
     "crawl_ok": true
   },
   "1875-0059": {
@@ -518,7 +518,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.670460",
-    "last_check": "2026-05-27T11:35:21.485997",
+    "last_check": "2026-05-27T15:31:05.837431",
     "crawl_ok": true
   },
   "1875-0060": {
@@ -542,7 +542,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.670658",
-    "last_check": "2026-05-27T11:35:37.002230",
+    "last_check": "2026-05-27T15:31:08.617667",
     "crawl_ok": true
   },
   "1875-0061": {
@@ -566,7 +566,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.670854",
-    "last_check": "2026-05-27T11:35:48.284657",
+    "last_check": "2026-05-27T15:31:11.499204",
     "crawl_ok": true
   },
   "1875-0065": {
@@ -590,7 +590,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.671071",
-    "last_check": "2026-05-27T11:36:01.917205",
+    "last_check": "2026-05-27T15:31:14.453624",
     "crawl_ok": true
   },
   "1875-0069": {
@@ -614,7 +614,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.671263",
-    "last_check": "2026-05-27T11:36:13.519347",
+    "last_check": "2026-05-27T15:31:17.394218",
     "crawl_ok": true
   },
   "1875-0070": {
@@ -638,7 +638,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.671452",
-    "last_check": "2026-05-27T11:36:25.927865",
+    "last_check": "2026-05-27T15:31:20.311547",
     "crawl_ok": true
   },
   "1875-0071": {
@@ -662,7 +662,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.671651",
-    "last_check": "2026-05-27T11:36:43.944548",
+    "last_check": "2026-05-27T15:31:23.205292",
     "crawl_ok": true
   },
   "1875-0073": {
@@ -686,7 +686,7 @@
     "status": "ativo",
     "fase": "pre_leilao",
     "added_at": "2026-05-27T00:07:27.671842",
-    "last_check": "2026-05-27T11:37:00.216827",
+    "last_check": "2026-05-27T15:31:26.120227",
     "crawl_ok": true
   }
 }

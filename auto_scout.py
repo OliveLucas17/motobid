@@ -128,12 +128,13 @@ def buscar_urls_leilao(url_base, slug):
     return urls[:10]
 
 def escolher_parser(slug):
-    """Retorna o parser correto para cada plataforma."""
     if 'sumare' in slug:
         return parse_sumare
     if 'rico' in slug:
         return parse_rico
-    # Todas as outras plataformas usam o parser generico
+    if 'sodresantoro' in slug:
+        from crawlers.sodresantoro import parse_leilao as parse_sodre
+        return parse_sodre
     from crawlers.generico import parse_leilao as parse_generico
     return parse_generico
 # ─────────────────────────────────────────────────────────

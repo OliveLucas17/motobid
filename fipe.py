@@ -11,6 +11,7 @@ Fluxo:
 """
 import re, json, os, time
 import urllib.request, urllib.parse
+import time 
 from datetime import datetime, timedelta
 from utils import log
 
@@ -22,6 +23,7 @@ FATOR_MERCADO = 1.15      # mercado real ~15% acima da FIPE
 
 # ─── HTTP helper ──────────────────────────────────────────
 def _get(url, timeout=10):
+    time.sleep(0.5)
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'MotoBid/2.1'})
         with urllib.request.urlopen(req, timeout=timeout) as r:

@@ -17,10 +17,14 @@ from scoring import get_tier, get_preco_ref, calcular_score, aprovado
 from config import detectar_categoria, LANCE_MINIMO, LANCE_MAXIMO, MODELOS_CARRO
 
 # ── Regex ──────────────────────────────────────────────────
-RE_URL   = re.compile(r'\[\]\((https://www\.sumareleiloes\.com\.br/lotes/[^\)]+)\)')
-RE_LOTE  = re.compile(r'LOTE\s+(\d{3,5})\s+(DOCUMENTO|SUCATA|COM\s+DIREITO)', re.I)
+RE_URL   = re.compile(
+    r'\[URL_LOTE:(https://www\.sumareleiloes\.com\.br/lotes/[^\]]+)\]'
+)
+RE_LOTE  = re.compile(
+    r'LOTE\s+(\d{3,5})\s*\n\s*(DOCUMENTO|SUCATA|COM\s+DIREITO)',
+    re.I
+)
 RE_SUCATA = re.compile(r'SUCATA|MOTOR\s+INSERVIVEL|SEM\s+DOCUMENTO', re.I)
-
 # ── Meses em portugues ─────────────────────────────────────
 MESES = {
     'janeiro':1,'fevereiro':2,'marco':3,'março':3,'abril':4,
@@ -65,7 +69,46 @@ def eh_carro(modelo):
     mu = modelo.upper()
     return any(c in mu for c in MODELOS_CARRO)
 
-is carro = eh_carro
+is_carro = eh_carro
+
+def extrair_conteudo(html):
+    """Extrai texto limpo + preserva URLs dos lotes."""
+    # Tenta JSON do gsk (legado)
+    try:
+        data = _json.loads(html)
+        c = data.get('data', {}).get('result', html)
+        c = re.sub(r'!\[.*?\]\(.*?\)', '', c)
+        c = re.sub(r'\n{3,}', '\n\n', c).strip()
+        return c
+    except:
+        pass
+
+    # HTML do Playwright
+    try:
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(html, 'html.parser')
+
+        # Extrai URLs dos lotes ANTES de remover tags
+        # Substitui <a href="/lotes/uuid"> por texto com URL
+        for a in soup.find_all('a', href=True):
+            href = a['href']
+            if '/lotes/' in href:
+                url_completa = href if href.startswith('http') else f'https://www.sumareleiloes.com.br{href}'
+                a.replace_with(f'\n[URL_LOTE:{url_completa}]\n')
+
+        for tag in soup(['script', 'style', 'noscript', 'header', 'footer', 'nav']):
+            tag.decompose()
+
+        texto = soup.get_text(separator='\n', strip=True)
+        texto = re.sub(r'\n{3,}', '\n\n', texto).strip()
+        return texto
+    except:
+        pass
+
+    texto = re.sub(r'<[^>]+>', ' ', html)
+    texto = re.sub(r'\s+', ' ', texto).strip()
+    return texto
+
 
 # ── Parser de bloco ────────────────────────────────────────
 def parse_bloco(bloco):
@@ -162,27 +205,13 @@ def dividir_em_blocos(texto):
 
 # ── Parser principal ───────────────────────────────────────
 def parse_leilao(html, url_leilao, id_leilao):
-    """
-    Extrai lotes aprovados de uma pagina de leilao do Sumare.
-    Retorna lista de dicts com dados de cada lote aprovado.
-    """
-    # Extrai conteudo do JSON retornado pelo gsk
-    conteudo = html
-    try:
-        data     = _json.loads(html)
-        conteudo = data.get('data', {}).get('result', html)
-    except:
-        pass
+    """Extrai lotes aprovados de uma pagina de leilao do Sumare."""
+    conteudo = extrair_conteudo(html)
 
-    # Remove imagens markdown
-    conteudo = re.sub(r'!\[.*?\]\(.*?\)', '', conteudo)
-    conteudo = re.sub(r'\n{3,}', '\n\n', conteudo).strip()
-
-    # Filtra leiloes encerrados — nao processa nada
     if not leilao_ativo(conteudo, id_leilao):
         return []
 
-    categoria = detectar_categoria(conteudo)
+    categoria = 'prefeitura'
     log(f'  Categoria: {categoria} | Chars: {len(conteudo)}')
 
     blocos     = dividir_em_blocos(conteudo)
@@ -191,6 +220,8 @@ def parse_leilao(html, url_leilao, id_leilao):
     lotes      = []
     vistos     = set()
     rejeitados = 0
+
+    # ... continua com o for loop
 
     for bloco in blocos:
         dados = parse_bloco(bloco)
@@ -250,7 +281,7 @@ def parse_leilao(html, url_leilao, id_leilao):
             'margem_estimada': round(margem, 2),
             'score':           score,
             'leilao':          id_leilao,
-            'categoria':       categoria,
+            'categoria':       'prefeitura',
             'site':            'sumare',
             'url_lote':        dados['url'] or url_leilao,
             'status':          'ativo',
