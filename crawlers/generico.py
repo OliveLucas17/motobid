@@ -133,6 +133,34 @@ def janelas(linhas, tam=15):
     for i in range(len(linhas)):
         yield i, '\n'.join(linhas[i:i+tam])
 
+def extrair_urls_do_html(html, dominio):
+    """
+    Extrai URLs do JSON bruto do gsk ANTES de limpar o texto.
+    Busca links de leiloes especificos na plataforma.
+    """
+    import re
+    urls = []
+    # Extrai do JSON bruto
+    try:
+        data     = _json.loads(html)
+        conteudo = data.get('data', {}).get('result', html)
+    except:
+        conteudo = html
+
+    # Busca URLs no formato markdown [texto](url)
+    urls_md = re.findall(r'\]\((https?://[^\)]+)\)', conteudo)
+    for u in urls_md:
+        if dominio in u and u not in urls:
+            urls.append(u)
+
+    # Busca URLs diretas no texto
+    urls_txt = re.findall(rf'https?://{re.escape(dominio)}[^\s\)"\'<>]+', conteudo)
+    for u in urls_txt:
+        if u not in urls:
+            urls.append(u)
+
+    return urls
+
 # ── Parser principal ───────────────────────────────────────
 def parse_leilao(html, url_leilao, slug):
     conteudo = extrair_conteudo(html)

@@ -4,8 +4,13 @@ import re, os, json
 from datetime import datetime
 
 MARCAS_CONHECIDAS = [
+    # Motos
     'HONDA', 'YAMAHA', 'SUZUKI', 'KAWASAKI', 'BMW',
     'DAFRA', 'SHINERAY', 'KTM', 'KASINSKI', 'BAJAJ', 'HAOJUE',
+    # Carros — para categorizar, nao rejeitar
+    'VOLKSWAGEN', 'VW', 'TOYOTA', 'FIAT', 'CHEVROLET', 'GM',
+    'FORD', 'HYUNDAI', 'NISSAN', 'RENAULT', 'JEEP', 'MITSUBISHI',
+    'CITROEN', 'PEUGEOT', 'KIA', 'HONDA', 'MERCEDES', 'AUDI',
 ]
 
 def log(msg, arquivo=None):

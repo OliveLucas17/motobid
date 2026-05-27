@@ -1,30 +1,6 @@
 {
   "0054": [
     {
-      "ts": "2026-05-26T23:13:06.725125",
-      "lance_atual": 5800.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
-    {
-      "ts": "2026-05-26T23:15:12.907772",
-      "lance_atual": 5800.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
-    {
-      "ts": "2026-05-26T23:22:26.506423",
-      "lance_atual": 5800.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
-    {
-      "ts": "2026-05-26T23:30:20.081655",
-      "lance_atual": 5800.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
-    {
       "ts": "2026-05-26T23:45:16.100542",
       "lance_atual": 5800.0,
       "status": "ativo",
@@ -299,33 +275,33 @@
       "lance_atual": 5800.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:45:15.410018",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:00:16.309051",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:15:14.356243",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:30:17.328862",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "0056": [
-    {
-      "ts": "2026-05-26T23:15:18.520410",
-      "lance_atual": 5150.0,
-      "status": "erro_crawl",
-      "crawl_ok": false
-    },
-    {
-      "ts": "2026-05-26T23:18:01.663247",
-      "lance_atual": 5150.0,
-      "status": "erro_crawl",
-      "crawl_ok": false
-    },
-    {
-      "ts": "2026-05-26T23:22:41.125834",
-      "lance_atual": 5150.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
-    {
-      "ts": "2026-05-26T23:30:34.003313",
-      "lance_atual": 5150.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
     {
       "ts": "2026-05-26T23:45:32.891109",
       "lance_atual": 5150.0,
@@ -601,6 +577,30 @@
       "lance_atual": 5150.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:45:32.937235",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:00:32.041886",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:15:27.376567",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:30:32.288094",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "0059": [
@@ -687,30 +687,6 @@
     }
   ],
   "0065": [
-    {
-      "ts": "2026-05-26T23:17:44.858350",
-      "lance_atual": 5550.0,
-      "status": "erro_crawl",
-      "crawl_ok": false
-    },
-    {
-      "ts": "2026-05-26T23:20:06.356142",
-      "lance_atual": 5550.0,
-      "status": "erro_crawl",
-      "crawl_ok": false
-    },
-    {
-      "ts": "2026-05-26T23:22:56.447329",
-      "lance_atual": 5550.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
-    {
-      "ts": "2026-05-26T23:30:45.542163",
-      "lance_atual": 5550.0,
-      "status": "ativo",
-      "crawl_ok": true
-    },
     {
       "ts": "2026-05-26T23:45:48.937467",
       "lance_atual": 5550.0,
@@ -983,6 +959,30 @@
     },
     {
       "ts": "2026-05-27T10:30:38.404365",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:45:45.599447",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:00:46.844505",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:15:39.606518",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:30:45.746636",
       "lance_atual": 5550.0,
       "status": "ativo",
       "crawl_ok": true
@@ -1360,6 +1360,30 @@
       "lance_atual": 4200.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:46:04.606181",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:01:04.488544",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:15:51.386404",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:31:00.750123",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "5105-0054": [
@@ -1617,6 +1641,30 @@
     },
     {
       "ts": "2026-05-27T10:31:02.421864",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:46:16.600703",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:01:19.089314",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:16:04.781687",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:31:15.115355",
       "lance_atual": 5800.0,
       "status": "ativo",
       "crawl_ok": true
@@ -1880,6 +1928,30 @@
       "lance_atual": 5550.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:46:34.909849",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:01:33.140580",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:16:17.289576",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:31:30.451063",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0005": [
@@ -2137,6 +2209,30 @@
     },
     {
       "ts": "2026-05-27T10:31:32.764459",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:46:52.162191",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:01:45.884052",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:16:29.103800",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:31:46.758309",
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
@@ -2400,6 +2496,30 @@
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:47:07.333155",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:02:01.160339",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:16:40.574262",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:31:58.971703",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0015": [
@@ -2657,6 +2777,30 @@
     },
     {
       "ts": "2026-05-27T10:31:55.844256",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:47:19.635688",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:02:16.538848",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:16:52.389496",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:32:11.351700",
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
@@ -2920,6 +3064,30 @@
       "lance_atual": 4000.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:47:31.277479",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:02:31.169714",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:17:04.317143",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:32:27.139973",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0019": [
@@ -3177,6 +3345,30 @@
     },
     {
       "ts": "2026-05-27T10:32:24.807684",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:47:50.859422",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:03:00.214798",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:17:16.976781",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:32:41.106646",
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
@@ -3440,6 +3632,30 @@
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:48:07.254504",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:03:11.233279",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:17:29.140364",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:32:56.055089",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0027": [
@@ -3697,6 +3913,30 @@
     },
     {
       "ts": "2026-05-27T10:32:46.599478",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:48:18.119893",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:03:27.677371",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:17:39.724870",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:33:07.859549",
       "lance_atual": 4000.0,
       "status": "ativo",
       "crawl_ok": true
@@ -3960,6 +4200,30 @@
       "lance_atual": 4200.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:48:30.505994",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:04:41.420977",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:17:52.433881",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:33:22.513008",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0031": [
@@ -4217,6 +4481,30 @@
     },
     {
       "ts": "2026-05-27T10:33:12.911450",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:48:41.998724",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:04:53.079214",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:18:04.434079",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:33:36.873644",
       "lance_atual": 3200.0,
       "status": "ativo",
       "crawl_ok": true
@@ -4480,6 +4768,30 @@
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:48:54.422109",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:05:05.400540",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:18:16.407762",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:33:52.106246",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0037": [
@@ -4731,6 +5043,36 @@
     },
     {
       "ts": "2026-05-27T10:18:37.469623",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:33:35.972754",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:49:06.651859",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:05:24.000645",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:18:29.999843",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:34:06.832530",
       "lance_atual": 4000.0,
       "status": "ativo",
       "crawl_ok": true
@@ -4988,6 +5330,36 @@
       "lance_atual": 3200.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:33:46.812180",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:49:26.239398",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:05:34.553119",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:18:42.166182",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:34:22.153296",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0045": [
@@ -5239,6 +5611,36 @@
     },
     {
       "ts": "2026-05-27T10:19:08.016807",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:33:58.751024",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:49:40.252143",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:05:46.600903",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:18:54.326628",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:34:37.675154",
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
@@ -5496,6 +5898,36 @@
       "lance_atual": 5400.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:34:12.174699",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:49:52.820186",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:05:59.341610",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:19:09.610003",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:34:52.495099",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0055": [
@@ -5747,6 +6179,36 @@
     },
     {
       "ts": "2026-05-27T10:19:33.391411",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:34:23.811246",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:50:05.233825",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:06:11.059262",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:19:21.542135",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:35:06.709285",
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
@@ -6004,6 +6466,36 @@
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:34:49.127556",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:51:01.456877",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:06:29.891824",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:19:33.750081",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:35:21.478880",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0060": [
@@ -6255,6 +6747,36 @@
     },
     {
       "ts": "2026-05-27T10:19:59.084632",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:35:01.062443",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:51:12.914265",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:06:40.813016",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:19:44.668418",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:35:36.995013",
       "lance_atual": 5400.0,
       "status": "ativo",
       "crawl_ok": true
@@ -6512,6 +7034,36 @@
       "lance_atual": 3200.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:35:14.149928",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:51:24.255434",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:06:51.809314",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:20:02.039293",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:35:48.277561",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0065": [
@@ -6763,6 +7315,36 @@
     },
     {
       "ts": "2026-05-27T10:20:22.189992",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:35:25.143873",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:51:39.674869",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:07:03.340794",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:20:14.348166",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:36:01.910178",
       "lance_atual": 5400.0,
       "status": "ativo",
       "crawl_ok": true
@@ -7020,6 +7602,36 @@
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:35:35.980990",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:51:51.069337",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:07:15.781426",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:20:26.661190",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:36:13.512279",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0070": [
@@ -7271,6 +7883,36 @@
     },
     {
       "ts": "2026-05-27T10:20:46.601931",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:35:51.748907",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:52:03.261729",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:07:27.634740",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:20:39.895249",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:36:25.920655",
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
@@ -7528,6 +8170,36 @@
       "lance_atual": 4600.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:36:06.246508",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:52:17.151242",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:07:38.889411",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:20:51.360580",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:36:43.937479",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "1875-0073": [
@@ -7779,6 +8451,36 @@
     },
     {
       "ts": "2026-05-27T10:21:20.064368",
+      "lance_atual": 7000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:36:28.726517",
+      "lance_atual": 7000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T10:52:31.848373",
+      "lance_atual": 7000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:07:51.125817",
+      "lance_atual": 7000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:21:04.741016",
+      "lance_atual": 7000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T11:37:00.209832",
       "lance_atual": 7000.0,
       "status": "ativo",
       "crawl_ok": true

@@ -204,14 +204,29 @@ def scout_plataformas(state):
         url_base  = info['url']
         leiloeiro = info['leiloeiro']
         logf(f'  [{slug}] {leiloeiro}')
-        urls = buscar_urls_leilao(url_base, slug) or [url_base]
+
+        # Plataformas SPA — so usa search, nao crawl direto
+        if slug in PLATAFORMAS_SPA:
+            urls = buscar_urls_leilao(url_base, slug)
+            logf(f'  [{slug}] SPA — usando {len(urls)} URLs do search')
+        else:
+            urls = buscar_urls_leilao(url_base, slug) or [url_base]
+
         parser = escolher_parser(slug)
+
         for url in urls:
             html = crawl_url(url, render_js=True)
             if not html:
                 continue
+            # Verifica se retornou conteudo util (nao a home)
+            from crawlers.generico import extrair_conteudo
+            conteudo = extrair_conteudo(html)
+            if len(conteudo) < 500:
+                logf(f'    [{slug}] conteudo insuficiente — pulando {url}')
+                continue
             try:
-                for l in parser(html, url, slug):
+                lotes = parser(html, url, slug)
+                for l in lotes:
                     l['site'] = slug
                     if add_lote(state, l):
                         total += 1
@@ -222,7 +237,6 @@ def scout_plataformas(state):
 
     logf(f'  Plataformas: {total} lote(s) novo(s)')
     return total
-
 # ─────────────────────────────────────────────────────────
 # ENTRADA PRINCIPAL
 # ─────────────────────────────────────────────────────────

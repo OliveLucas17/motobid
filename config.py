@@ -340,6 +340,20 @@ PLATAFORMAS_SP = {
     },
 }
 
+# Plataformas SPA — gsk nao consegue crawlar diretamente
+# Usam apenas gsk search para encontrar lotes especificos
+PLATAFORMAS_SPA = {
+    'superbid', 'vivaleiloes', 'leilaoonline',
+    'bidmax', 'lancenow',
+}
+
+# Plataformas que funcionam bem com crawl direto
+PLATAFORMAS_CRAWL = {
+    'hastapublica', 'liderleiloes', 'sodresantoro',
+    'sfrazao', 'alienajud', 'amaralleiloes',
+    'lanceleiloes', 'crisleiloes', 'ktzleiloes',
+}
+
 # Leiloes conhecidos do Sumare — varredura direta por ID
 LEILOES_SUMARE = {
     '5105': 'Prefeitura Vinhedo',
