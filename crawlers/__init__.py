@@ -10,41 +10,29 @@ import subprocess, time
 from utils import log
 
 def crawl_url(url, render_js=True, retries=3, timeout=150):
-    """
-    Crawl de uma URL via gsk.
-    render_js=True para sites com JavaScript (necessario para Sumare e maioria).
-    Tenta ate 3 vezes com backoff exponencial (1s, 2s, 4s).
-    Retorna texto da pagina ou string vazia.
-    """
     for tentativa in range(retries):
         try:
             cmd = ['gsk', 'crawl', url]
             if render_js:
                 cmd.append('--render_js')
             r = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=timeout
+                cmd, capture_output=True, text=True, timeout=timeout
             )
-            if r.stdout and len(r.stdout) > 300:
-                return r.stdout
+            if r.stdout and len(r.stdout) > 100:
+                return r.stdout  # retorna raw — parser extrai JSON
             log(f'  crawl vazio ({tentativa+1}/{retries}): {url}')
         except subprocess.TimeoutExpired:
-            log(f'  timeout {timeout}s ({tentativa+1}/{retries}): {url}')
+            log(f'  timeout ({tentativa+1}/{retries}): {url}')
         except FileNotFoundError:
-            log('  gsk nao encontrado — verifique instalacao')
+            log('  gsk nao encontrado')
             return ''
         except Exception as e:
-            log(f'  erro crawl: {e}')
-
+            log(f'  erro: {e}')
         if tentativa < retries - 1:
-            espera = 2 ** tentativa  # 1s, 2s, 4s
-            log(f'  aguardando {espera}s antes de tentar novamente...')
-            time.sleep(espera)
-
+            time.sleep(2 ** tentativa)
     log(f'  FALHA definitiva: {url}')
     return ''
+    
 
 def crawl_lote(lot):
     """

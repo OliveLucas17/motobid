@@ -18,14 +18,19 @@ def log(msg, arquivo=None):
             f.write(line + '\n')
 
 def normalizar_modelo(texto):
-    """Remove barra e prefixos do formato Sumare.
-    H/HONDA CG 125 TODAY -> HONDA CG 125 TODAY
-    HONDA/XRE 190        -> HONDA XRE 190
+    """Remove barra, prefixos do Sumare e lixo do modelo.
+    H/HONDA CG 125 TODAY     -> HONDA CG 125 TODAY
+    HONDA/XRE 190            -> HONDA XRE 190
+    HONDA CG 160 START, 24/24 -> HONDA CG 160 START
     """
     t = texto.upper().strip()
+    # Remove barra de prefixo
     t = re.sub(r'^H/(HONDA)', r'HONDA', t)
     for marca in MARCAS_CONHECIDAS:
         t = re.sub(f'^{marca}/', f'{marca} ', t)
+    # Remove virgula + ano do final (ex: ", 24/24" ou ", 2024/2024")
+    t = re.sub(r',?\s*\d{2,4}/\d{2,4}\s*$', '', t)
+    # Remove espacos duplos
     t = re.sub(r'\s+', ' ', t)
     return t.strip()
 

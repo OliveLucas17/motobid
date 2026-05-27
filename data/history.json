@@ -278,6 +278,18 @@
       "lance_atual": 5800.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:30:20.081655",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:45:16.100542",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "0056": [
@@ -556,6 +568,18 @@
     },
     {
       "ts": "2026-05-26T23:22:41.125834",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:30:34.003313",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:45:32.891109",
       "lance_atual": 5150.0,
       "status": "ativo",
       "crawl_ok": true
@@ -914,6 +938,18 @@
     },
     {
       "ts": "2026-05-26T23:22:56.447329",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:30:45.542163",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:45:48.937467",
       "lance_atual": 5550.0,
       "status": "ativo",
       "crawl_ok": true

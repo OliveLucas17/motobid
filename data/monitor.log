@@ -894,3 +894,39 @@ SyntaxError: unterminated string literal (detected at line 183)
 [26/05 23:22:56]   0065 | Honda CG 160 Start | pre_leilao | R$ 5.550
 [26/05 23:22:56] Dashboard gerado: dashboard/index.html
 [26/05 23:22:56] OK — 3 lotes verificados
+[26/05 23:30:01] ==== MONITOR ====
+[26/05 23:30:01]   0054: verificando...
+[26/05 23:30:20]   0054 | Honda CG 160 Start | pre_leilao | R$ 5.800
+[26/05 23:30:20]   0056: verificando...
+[26/05 23:30:34]   0056 | Honda CG 160 Fan | pre_leilao | R$ 5.150
+[26/05 23:30:34]   0065: verificando...
+[26/05 23:30:45]   0065 | Honda CG 160 Start | pre_leilao | R$ 5.550
+[26/05 23:30:45] Dashboard gerado: dashboard/index.html
+[26/05 23:30:45] OK — 3 lotes verificados
+[26/05 23:30:01] ==== MONITOR ====
+[26/05 23:30:01]   0054: verificando...
+[26/05 23:30:20]   0054 | Honda CG 160 Start | pre_leilao | R$ 5.800
+[26/05 23:30:20]   0056: verificando...
+[26/05 23:30:34]   0056 | Honda CG 160 Fan | pre_leilao | R$ 5.150
+[26/05 23:30:34]   0065: verificando...
+[26/05 23:30:45]   0065 | Honda CG 160 Start | pre_leilao | R$ 5.550
+[26/05 23:30:45] Dashboard gerado: dashboard/index.html
+[26/05 23:30:45] OK — 3 lotes verificados
+[26/05 23:45:01] ==== MONITOR ====
+[26/05 23:45:01]   0054: verificando...
+[26/05 23:45:16]   0054 | Honda CG 160 Start | pre_leilao | R$ 5.800
+[26/05 23:45:16]   0056: verificando...
+[26/05 23:45:32]   0056 | Honda CG 160 Fan | pre_leilao | R$ 5.150
+[26/05 23:45:32]   0065: verificando...
+[26/05 23:45:48]   0065 | Honda CG 160 Start | pre_leilao | R$ 5.550
+[26/05 23:45:48] Dashboard gerado: dashboard/index.html
+[26/05 23:45:48] OK — 3 lotes verificados
+[26/05 23:45:01] ==== MONITOR ====
+[26/05 23:45:01]   0054: verificando...
+[26/05 23:45:16]   0054 | Honda CG 160 Start | pre_leilao | R$ 5.800
+[26/05 23:45:16]   0056: verificando...
+[26/05 23:45:32]   0056 | Honda CG 160 Fan | pre_leilao | R$ 5.150
+[26/05 23:45:32]   0065: verificando...
+[26/05 23:45:48]   0065 | Honda CG 160 Start | pre_leilao | R$ 5.550
+[26/05 23:45:48] Dashboard gerado: dashboard/index.html
+[26/05 23:45:48] OK — 3 lotes verificados
