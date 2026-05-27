@@ -136,7 +136,7 @@ def scout_sumare(state):
         logf(f'  search erro: {e}')
 
     for lid, desc in todos.items():
-        url  = URL_SUMARE_LEILAO.format(id=lid)
+        url = URL_SUMARE_LEILAO.format(id=lid)
         logf(f'  Leilao {lid} ({desc})')
         html = crawl_url(url, render_js=True)
         if not html:
@@ -146,6 +146,7 @@ def scout_sumare(state):
             if add_lote(state, l):
                 total += 1
                 notificar_novo(l)
+        salvar_json(STATE_FILE, state)
         time.sleep(2)
 
     logf(f'  Sumare: {total} lote(s) novo(s)')

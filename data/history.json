@@ -290,6 +290,30 @@
       "lance_atual": 5800.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:56:44.299801",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:00:15.718523",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:08:59.740425",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:15:17.090193",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "0056": [
@@ -580,6 +604,30 @@
     },
     {
       "ts": "2026-05-26T23:45:32.891109",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:57:12.413281",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:00:26.784880",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:09:14.865219",
+      "lance_atual": 5150.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:15:32.434415",
       "lance_atual": 5150.0,
       "status": "ativo",
       "crawl_ok": true
@@ -953,6 +1001,30 @@
       "lance_atual": 5550.0,
       "status": "ativo",
       "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-26T23:57:24.651440",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:00:40.784108",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:09:30.964249",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:15:47.417636",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ],
   "4414-BROTAS-0002": [
@@ -1067,6 +1139,322 @@
       "data_encerramento": null,
       "html_snippet": "{\n  \"version\": 1,\n  \"status\": \"ok\",\n  \"message\": \"success\",\n  \"data\": {\n    \"result\": \"##### Lote 0056: HONDA/CG 160 FAN, 21/21\\n\\nCOM DIREITO A DOCUMENTO/CIRCULAÇÃO\\n\\n**COR:** VERMELHA\\n\\n**COMBUSTÍVEL:** GASOLINA\\n\\n**PLACA:** GAF\\\\*\\\\*\\\\*\\\\*8/SP\\n\\n**CHASSI:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*026\\n\\n**MOTOR/NÚMERO:** \\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*\\\\*059086\\n\\nOnde visitar?\\n\\n[RUA YOSHIDA TOMIYOSHI, 3 - MACUCO, VALINHOS / SP](https://maps.app.goo.gl/U4QHkpr4yBRmrGbM9)\\n\\nFechamento: h\\n\\n[Em breve](#)\\n\\n<table><tbody><tr><td><span>Lance Inicial:</span></td><td><span>R$ 5.150,00</span></td></tr><tr><td><span>Lance Atual:</span></td><td><span>R$ 0,00</span></td></tr><tr><td><span>Incremento:</span></td><td><span>R$ 250,00</span></td></tr></tbody></table>\\n\\n![](https://sspark.genspark.ai/cfimages?u1=ES0j%2FAwCwUW9Gl3as4ABjFdI3s6QlN8iJ9gtkfca73GYu2F127bk4%2FJxUrASURD5%2BCq4bHQcYXSrQ2L%2FESQTlfHTWWscs3%2B1WBN9&u2=nIYgKHlbUVRzangc&width=1024)\"\n  },\n  \"session_state\": null\n}\n",
       "erro": null
+    }
+  ],
+  "5105-0053": [
+    {
+      "ts": "2026-05-27T00:09:42.759300",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:16:02.731786",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "5105-0054": [
+    {
+      "ts": "2026-05-27T00:10:04.597270",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:16:18.300286",
+      "lance_atual": 5800.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "5105-0065": [
+    {
+      "ts": "2026-05-27T00:10:16.547041",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:16:34.058573",
+      "lance_atual": 5550.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0005": [
+    {
+      "ts": "2026-05-27T00:10:31.243673",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:16:49.177328",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0009": [
+    {
+      "ts": "2026-05-27T00:10:43.099603",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:17:07.897744",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0015": [
+    {
+      "ts": "2026-05-27T00:11:01.886381",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:17:22.874082",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0017": [
+    {
+      "ts": "2026-05-27T00:11:18.688898",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:17:37.673241",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0019": [
+    {
+      "ts": "2026-05-27T00:11:35.050805",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:17:55.728613",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0025": [
+    {
+      "ts": "2026-05-27T00:11:47.163056",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:18:09.576367",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0027": [
+    {
+      "ts": "2026-05-27T00:11:59.230051",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:18:21.023616",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0030": [
+    {
+      "ts": "2026-05-27T00:12:11.645774",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:18:36.392308",
+      "lance_atual": 4200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0031": [
+    {
+      "ts": "2026-05-27T00:12:22.119055",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:18:47.945246",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0035": [
+    {
+      "ts": "2026-05-27T00:12:32.752111",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:18:59.253879",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0037": [
+    {
+      "ts": "2026-05-27T00:12:44.861857",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:19:13.866133",
+      "lance_atual": 4000.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0041": [
+    {
+      "ts": "2026-05-27T00:12:58.273125",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:19:26.063688",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0045": [
+    {
+      "ts": "2026-05-27T00:13:09.535203",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:19:38.183378",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0050": [
+    {
+      "ts": "2026-05-27T00:13:25.481236",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:19:52.201006",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0055": [
+    {
+      "ts": "2026-05-27T00:13:43.852661",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    },
+    {
+      "ts": "2026-05-27T00:20:09.683684",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0059": [
+    {
+      "ts": "2026-05-27T00:14:19.689852",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0060": [
+    {
+      "ts": "2026-05-27T00:14:34.458424",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0061": [
+    {
+      "ts": "2026-05-27T00:15:48.323182",
+      "lance_atual": 3200.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0065": [
+    {
+      "ts": "2026-05-27T00:16:03.184424",
+      "lance_atual": 5400.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0069": [
+    {
+      "ts": "2026-05-27T00:16:19.211157",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0070": [
+    {
+      "ts": "2026-05-27T00:16:34.276294",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0071": [
+    {
+      "ts": "2026-05-27T00:16:50.642288",
+      "lance_atual": 4600.0,
+      "status": "ativo",
+      "crawl_ok": true
+    }
+  ],
+  "1875-0073": [
+    {
+      "ts": "2026-05-27T00:17:06.857856",
+      "lance_atual": 7000.0,
+      "status": "ativo",
+      "crawl_ok": true
     }
   ]
 }
