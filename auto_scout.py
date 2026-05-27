@@ -7,6 +7,7 @@ Roda 1x por dia via cron (07:00).
 import re, os, json, time, subprocess, smtplib, shutil
 from datetime import datetime
 from email.mime.text import MIMEText
+from crawlers.generico import parse_leilao as parse_generico
 
 from config import (
     PLATAFORMAS_SP, LEILOES_SUMARE, LEILOES_RICO,
@@ -88,9 +89,20 @@ def add_lote(state, lote):
 # BUSCA DE LEILOES
 # ─────────────────────────────────────────────────────────
 def buscar_urls_leilao(url_base, slug):
-    urls  = []
-    dominio = url_base.replace('https://', '').replace('http://', '').rstrip('/')
-    query = f'site:{dominio} moto leilao'
+    urls    = []
+    dominio = url_base.replace('https://','').replace('http://','').rstrip('/')
+
+    # Queries especificas por plataforma
+    queries_especiais = {
+        'superbid':    f'site:{dominio} moto leilao ativo',
+        'sodresantoro': f'site:{dominio} moto leilao',
+        'lanceleiloes': f'site:{dominio} motocicleta leilao',
+        'alienajud':   f'site:{dominio} moto leilao judicial',
+        'amaralleiloes': f'site:{dominio} moto leilao',
+    }
+
+    query = queries_especiais.get(slug, f'site:{dominio} moto leilao')
+
     try:
         r = subprocess.run(
             ['gsk', 'search', query],
@@ -101,21 +113,29 @@ def buscar_urls_leilao(url_base, slug):
             r.stdout
         )
         for u in encontradas:
-            if any(p in u.lower() for p in ['/leilao', '/lote', '/veiculo', '/moto', '/bem']):
+            if any(p in u.lower() for p in [
+                '/leilao', '/lote', '/veiculo', '/moto',
+                '/bem', '/produto', '/item', '/catalogo',
+                '/busca', '/search',
+            ]):
                 if u not in urls:
                     urls.append(u)
+
         logf(f'  {slug}: {len(urls)} URL(s) encontrada(s)')
     except Exception as e:
         logf(f'  {slug} search erro: {e}')
+
     return urls[:10]
 
 def escolher_parser(slug):
+    """Retorna o parser correto para cada plataforma."""
     if 'sumare' in slug:
         return parse_sumare
     if 'rico' in slug:
         return parse_rico
-    return parse_sumare
-
+    # Todas as outras plataformas usam o parser generico
+    from crawlers.generico import parse_leilao as parse_generico
+    return parse_generico
 # ─────────────────────────────────────────────────────────
 # VARREDURAS
 # ─────────────────────────────────────────────────────────

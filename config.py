@@ -8,6 +8,18 @@ TIER_TOP    = ['HONDA', 'YAMAHA']
 TIER_ALTA   = ['SUZUKI', 'KAWASAKI', 'BMW', 'DAFRA']
 TIER_OUTRAS = ['SHINERAY', 'KTM', 'KASINSKI', 'APRILIA', 'BAJAJ', 'HAOJUE', 'ROYAL ENFIELD']
 EXCLUIDAS   = []
+# Modelos de carro — categorizados em section futura
+MODELOS_CARRO = [
+    'FIT','CIVIC','CITY','HRV','CRV','WRV',
+    'COROLLA','ETIOS','YARIS','HILUX','CAMRY',
+    'GOL','POLO','VOYAGE','FOX','SAVEIRO','GOLF','TIGUAN',
+    'UNO','PALIO','SIENA','PUNTO','DOBLO','FIORINO','TORO','STRADA',
+    'ONIX','PRISMA','CELTA','CORSA','VECTRA','CRUZE','TRACKER','COBALT',
+    'FIESTA','KA','FOCUS','ECOSPORT','RANGER','FUSION','EDGE',
+    'MONZA','ESCORT','ASTRA','ZAFIRA','MERIVA',
+    'SANDERO','DUSTER','LOGAN','STEPWAY',
+    'COMPASS','RENEGADE','CHEROKEE',
+]
 
 # ─────────────────────────────────────────────────────────
 # MARGENS MÍNIMAS POR TIER E CATEGORIA
@@ -115,7 +127,7 @@ def detectar_categoria(texto):
             if kw in tl:
                 scores[cat] += 1
     melhor = max(scores, key=scores.get)
-    return melhor if scores[melhor] > 0 else 'prefeitura'
+    return melhor if scores[melhor] > 0 else 'None'
 
 # ─────────────────────────────────────────────────────────
 # PLATAFORMAS — leiloeiros oficiais SP
