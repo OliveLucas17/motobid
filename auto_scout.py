@@ -1,346 +1,294 @@
 #!/usr/bin/env python3
-'''
-AUTO_SCOUT — MotoBid
-Varredura automática de novos lotes com ranking por marca.
-Referência de preço: Facebook Marketplace (realismo brasileiro).
-'''
-import subprocess, re, json, os, smtplib, time
-from datetime import datetime
+"""
+auto_scout.py — MotoBid v2.1
+Varredura automatica de todas as plataformas.
+Roda 1x por dia via cron (07:00).
 
-STATE_FILE = '/home/work/.openclaw/workspace/projects/motobid/data/state.json'
-LOG_FILE = '/home/work/.openclaw/workspace/projects/motobid/data/scout.log'
+Fluxo:
+  1. Varre todas as plataformas de PLATAFORMAS_SP
+  2. Para cada plataforma, busca leiloes ativos de motos
+  3. Para cada leilao, extrai lotes e aplica filtros
+  4. Lotes aprovados vao para state.json
+  5. Envia alertas por email e Telegram
+"""
+import re, os, json, time, subprocess, smtplib
+from datetime import datetime
+from email.mime.text import MIMEText
 
 from config import (
-    TIER_TOP, TIER_HIGH, TIER_OTHER, EXCLUDED, SUCATA_EXCLUDED,
-    MARGEM_MIN_TIER1, MARGEM_MIN_TIER2, MARGEM_MIN_TIER3,
-    LANCE_MINIMO, LANCE_MAXIMO, SCORE_MINIMO,
-    DOC_OK_KEYWORDS, PREFETURA_KEYWORDS, DETRAN_EXCLUDED,
-    FB_MARKETPLACE_PRICES, FIPE_PRICES,
-    EMAIL_TO
+    PLATAFORMAS_SP, LEILOES_SUMARE, LEILOES_RICO,
+    URL_SUMARE_LEILAO, EMAIL_TO,
+    TELEGRAM_TOKEN, TELEGRAM_CHAT_ID,
 )
+from crawlers import crawl_url
+from crawlers.sumare import parse_leilao as parse_sumare
+from crawlers.ricoleiloes import parse_leilao as parse_rico
+from utils import log, carregar_json, salvar_json
 
-def log(msg):
-    ts = datetime.now().strftime('%d/%m %H:%M')
-    line = '[' + ts + '] ' + msg
-    print(line)
-    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-    with open(LOG_FILE, 'a') as f:
-        f.write(line + '\n')
+STATE_FILE = 'data/state.json'
+LOG_FILE   = 'data/scout.log'
 
-def get_tier(brand):
-    b = brand.upper()
-    if b in TIER_TOP: return 1
-    if b in TIER_HIGH: return 2
-    if b in TIER_OTHER: return 3
-    return 0
+def logf(msg):
+    log(msg, LOG_FILE)
 
-def get_margem_min(tier):
-    if tier == 1: return MARGEM_MIN_TIER1
-    if tier == 2: return MARGEM_MIN_TIER2
-    if tier == 3: return MARGEM_MIN_TIER3
-    return 999999
-
-def get_tier_name(tier):
-    if tier == 1: return 'TOP'
-    if tier == 2: return 'ALTA'
-    if tier == 3: return 'OUTRAS'
-    return '?'
-
-def get_tier_score(tier):
-    if tier == 1: return 10
-    if tier == 2: return 8
-    if tier == 3: return 6
-    return 0
-
-def get_price_ref(model, brand):
-    '''Tenta FB Marketplace primeiro, fallback FIPE.'''
-    key = (brand.upper() + ' ' + model.upper()).strip()
-    for fb_key in FB_MARKETPLACE_PRICES:
-        if fb_key in key or key in fb_key:
-            return FB_MARKETPLACE_PRICES[fb_key], 'FB'
-    # Fallback FIPE
-    for fipe_key in FIPE_PRICES:
-        if fipe_key.upper() in key:
-            return FIPE_PRICES[fipe_key], 'FIPE'
-    return None, None
-
-def crawl(url, retries=3):
-    for attempt in range(retries):
-        try:
-            cmd = ['gsk', 'crawl', url, '--render_js']
-            r = subprocess.run(cmd, capture_output=True, text=True, timeout=150)
-            text = r.stdout
-            if text and len(text) > 200:
-                return text
-            time.sleep(2 ** attempt)
-        except:
-            time.sleep(2 ** attempt)
-    return ''
-
-def detect_brand(text):
-    t = text.upper()
-    for b in ['HONDA', 'YAMAHA', 'SUZUKI', 'DAFRA', 'KAWASAKI', 'BMW', 'KASINSKI', 'KTM', 'SHINERAY', 'HAOJUE', 'ROYAL ENFIELD']:
-        if b in t:
-            return b
-    return 'OUTRA'
-
-def is_document_ok(text):
-    tl = text.lower()
-    if any(k in tl for k in SUCATA_EXCLUDED):
-        return False
-    return any(k in tl for k in DOC_OK_KEYWORDS)
-
-def is_prefeitura(text):
-    tl = text.lower()
-    if any(k in tl for k in DETRAN_EXCLUDED):
-        return False
-    return any(k in tl for k in PREFETURA_KEYWORDS)
-
-def parse_price(text):
-    m = re.search(r'R?\\$?\\s*([0-9]{1,3}(?:\\.[0-9]{3})*(?:,[0-9]{2})?)', text)
-    if m:
-        try:
-            return float(m.group(1).replace('.', '').replace(',', '.'))
-        except:
-            pass
-    return None
-
-def extract_model(text):
-    model_m = re.search(r'(?:MODELO|VEICULO|MOTO)[:\\s]*([^\\n<]{3,70})', text, re.I)
-    if model_m:
-        return model_m.group(1).strip()[:70]
-    # Try pattern like HONDA/CG 125 TITAN
-    m2 = re.search(r'([A-Z]{2,15})/([A-Z0-9 \\-]{3,50})', text)
-    if m2:
-        return m2.group(1) + ' ' + m2.group(2).strip()
-    return ''
-
-def calculate_score(tier, margem, documento_ok, ano):
-    base = get_tier_score(tier)
-    doc_bonus = 2 if documento_ok else 0
-    margin_score = min(5, round((margem / 1500) * 3, 1))
-    year_bonus = 0
+# ─────────────────────────────────────────────────────────
+# NOTIFICACOES
+# ─────────────────────────────────────────────────────────
+def enviar_email(assunto, corpo):
     try:
-        y = int(ano[:2]) if len(ano) >= 2 else 0
-        if y >= 22: year_bonus = 1.5
-        elif y >= 20: year_bonus = 0.5
-    except:
-        pass
-    return round(min(10, base + doc_bonus + margin_score + year_bonus), 1)
-
-def send_email(subject, body):
-    try:
-        msg = smtplib.MIMEText(body, 'plain')
-        msg['Subject'] = subject
-        msg['From'] = 'motobid@alfaemail.com'
-        msg['To'] = EMAIL_TO
+        msg = MIMEText(corpo, 'plain', 'utf-8')
+        msg['Subject'] = assunto
+        msg['From']    = 'motobid@localhost'
+        msg['To']      = EMAIL_TO
         with smtplib.SMTP('localhost', 25, timeout=10) as s:
-            s.sendmail('motobid@alfaemail.com', [EMAIL_TO], msg.as_string())
-        log('Email enviado')
+            s.sendmail('motobid@localhost', [EMAIL_TO], msg.as_string())
+        logf('  email enviado')
     except Exception as e:
-        log('Erro email: ' + str(e))
+        logf(f'  email erro: {e}')
 
-def add_lot(lot):
-    state = {}
-    if os.path.exists(STATE_FILE):
-        try:
-            with open(STATE_FILE) as f:
-                state = json.load(f)
-        except:
-            state = {}
+def enviar_telegram(msg):
+    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
+        return
+    try:
+        import urllib.request, urllib.parse
+        url  = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
+        data = urllib.parse.urlencode({
+            'chat_id':    TELEGRAM_CHAT_ID,
+            'text':       msg,
+            'parse_mode': 'HTML',
+        }).encode()
+        urllib.request.urlopen(url, data, timeout=10)
+        logf('  telegram enviado')
+    except Exception as e:
+        logf(f'  telegram erro: {e}')
 
-    lot_id = lot.get('id', 'UNK')
-    if lot_id in state:
+def notificar_novo(lote):
+    modelo = lote.get('modelo', '?')
+    ano    = lote.get('ano', '')
+    lance  = lote.get('lance_atual', 0)
+    margem = lote.get('margem_estimada', 0)
+    score  = lote.get('score', 0)
+    cat    = lote.get('categoria', '?').upper()
+    url    = lote.get('url_lote', '')
+    msg = (
+        f'[{cat}] Novo lote encontrado\n'
+        f'{modelo} {ano}\n'
+        f'Lance: R${lance:,.0f} | Margem: R${margem:,.0f} | Score: {score}\n'
+        f'{url}'
+    )
+    enviar_email(f'[MotoBid] {modelo} | R${margem:,.0f} margem', msg)
+    enviar_telegram(msg)
+
+# ─────────────────────────────────────────────────────────
+# STATE
+# ─────────────────────────────────────────────────────────
+def add_lote(state, lote):
+    """Adiciona lote se nao existir. Retorna True se novo."""
+    lid = lote['id']
+    if lid in state:
         return False
-
-    lot['fase'] = 'discovery'
-    lot['added_at'] = datetime.now().isoformat()
-    lot['last_check'] = None
-    lot['last_lance'] = lot.get('lance_inicial', 0)
-
-    state[lot_id] = lot
-
-    with open(STATE_FILE, 'w') as f:
-        json.dump(state, f, indent=2, ensure_ascii=False)
-
-    modelo = lot.get('modelo', '?')
-    lance = lot.get('lance_inicial', 0)
-    margem = lot.get('margem_estimada', 0)
-    tier = lot.get('tier', 0)
-    tier_name = get_tier_name(tier)
-    tier_icon = {'TOP': '[HOND/YAM]', 'ALTA': '[ALTAS]', 'OUTRAS': '[OUTRAS]', '?': '[?]'}
-    log('NOVO LOTE: ' + lot_id + ' | ' + modelo + ' | R$ ' + str(lance) + ' | margem R$ ' + str(margem) + ' | ' + tier_icon.get(tier_name, ''))
-
-    subj = '[MotoBid] Novo lote: ' + modelo + ' | R$ ' + str(margem) + ' margem'
-    body = 'Novo lote adicionado ao MotoBid\n\n'
-    body += 'ID: ' + lot_id + '\n'
-    body += 'Modelo: ' + modelo + ' ' + str(lot.get('ano', '')) + '\n'
-    body += 'Marca: ' + str(lot.get('marca', '')) + '\n'
-    body += 'Tier: ' + tier_icon.get(tier_name, '') + '\n'
-    body += 'Leilao: ' + str(lot.get('leilao', '')) + '\n'
-    body += 'Lance: R$ ' + str(lot.get('lance_inicial', 0)) + '\n'
-    body += 'Preco Ref (' + str(lot.get('price_ref', '?')) + '): R$ ' + str(lot.get('preco_ref', 0)) + '\n'
-    body += 'Margem: R$ ' + str(lot.get('margem_estimada', 0)) + '\n'
-    body += 'Score: ' + str(lot.get('score', 0)) + '/10\n'
-    body += 'Documento: ' + ('SIM' if lot.get('documento_ok') else 'NAO') + '\n'
-    body += 'URL: ' + str(lot.get('url_lote', '')) + '\n\n'
-    body += 'MotoBid - AlfaPrime Transportes'
-    send_email(subj, body)
+    lote['added_at']   = datetime.now().isoformat()
+    lote['last_check'] = None
+    state[lid] = lote
     return True
 
-def analyze_block(block, source_url, site_key):
-    if len(block) < 80:
-        return None
+# ─────────────────────────────────────────────────────────
+# BUSCA DE LEILOES ATIVOS
+# ─────────────────────────────────────────────────────────
+def buscar_urls_leilao(url_base, slug):
+    """
+    Usa gsk search para encontrar leiloes de motos
+    dentro de uma plataforma.
+    Retorna lista de URLs de leiloes encontrados.
+    """
+    urls = []
+    query = f'site:{url_base.replace("https://","").replace("http://","").rstrip("/")} moto leilao'
+    try:
+        r = subprocess.run(
+            ['gsk', 'search', query],
+            capture_output=True, text=True, timeout=30
+        )
+        # Extrai URLs do resultado
+        encontradas = re.findall(
+            rf'https?://{re.escape(url_base.replace("https://","").replace("http://","").rstrip("/"))}[^\s"\'<>]+',
+            r.stdout
+        )
+        # Filtra URLs que parecem ser de leilao
+        for u in encontradas:
+            if any(p in u.lower() for p in ['/leilao', '/lote', '/veiculo', '/moto', '/bem']):
+                if u not in urls:
+                    urls.append(u)
+        logf(f'  {slug}: {len(urls)} URL(s) encontrada(s) via search')
+    except Exception as e:
+        logf(f'  {slug} search erro: {e}')
+    return urls[:10]  # maximo 10 por plataforma por rodada
 
-    brand = detect_brand(block)
-    if brand == 'OUTRA' or brand in EXCLUDED:
-        return None
+def escolher_parser(slug):
+    """Retorna a funcao de parse correta para cada plataforma."""
+    if 'sumare' in slug:
+        return parse_sumare
+    if 'rico' in slug:
+        return parse_rico
+    # Default: tenta o parser do Sumare (mais robusto)
+    return parse_sumare
 
-    if not is_document_ok(block):
-        return None
+# ─────────────────────────────────────────────────────────
+# VARREDURA SUMARE — lista fixa de IDs conhecidos
+# ─────────────────────────────────────────────────────────
+def scout_sumare(state):
+    logf('--- Sumare Leiloes (IDs conhecidos) ---')
+    total = 0
 
-    price = parse_price(block)
-    if price is None or price < LANCE_MINIMO or price > LANCE_MAXIMO:
-        return None
+    # IDs conhecidos + busca por novos
+    todos = dict(LEILOES_SUMARE)
+    try:
+        r = subprocess.run(
+            ['gsk', 'search', 'site:sumareleiloes.com.br leilao motos'],
+            capture_output=True, text=True, timeout=30
+        )
+        novos_ids = re.findall(r'/leiloes/(\d{3,6})', r.stdout)
+        for nid in novos_ids:
+            if nid not in todos:
+                todos[nid] = 'descoberto via search'
+                logf(f'  Novo ID descoberto: {nid}')
+    except Exception as e:
+        logf(f'  search erro: {e}')
 
-    tier = get_tier(brand)
-    if tier == 0:
-        return None
+    for lid, desc in todos.items():
+        url  = URL_SUMARE_LEILAO.format(id=lid)
+        logf(f'  Leilao {lid} ({desc}): {url}')
+        html = crawl_url(url, render_js=True)
+        if not html:
+            logf(f'  Sem resposta — pulando')
+            continue
+        lotes = parse_sumare(html, url, lid)
+        for l in lotes:
+            if add_lote(state, l):
+                total += 1
+                notificar_novo(l)
+        time.sleep(2)  # respeita o servidor
 
-    margem_min = get_margem_min(tier)
+    logf(f'  Sumare: {total} lote(s) novo(s)')
+    return total
 
-    model = extract_model(block)
-    if not model:
-        model = brand + ' Unknown'
+# ─────────────────────────────────────────────────────────
+# VARREDURA RICO LEILOES
+# ─────────────────────────────────────────────────────────
+def scout_rico(state):
+    logf('--- Rico Leiloes ---')
+    total = 0
+    for lid, info in LEILOES_RICO.items():
+        url  = info['url']
+        logf(f'  Leilao {lid} ({info["nome"]}): {url}')
+        html = crawl_url(url, render_js=True)
+        if not html:
+            logf(f'  Sem resposta — pulando')
+            continue
+        lotes = parse_rico(html, url, lid)
+        for l in lotes:
+            if add_lote(state, l):
+                total += 1
+                notificar_novo(l)
+        time.sleep(2)
+    logf(f'  Rico: {total} lote(s) novo(s)')
+    return total
 
-    year_m = re.search(r'(?:ANO|MODELO)[:\\s]*(\\d{2}/\\d{2})', block, re.I)
-    year = year_m.group(1) if year_m else '??/??'
+# ─────────────────────────────────────────────────────────
+# VARREDURA TODAS AS PLATAFORMAS
+# ─────────────────────────────────────────────────────────
+def scout_plataformas(state):
+    """
+    Varre todas as 34 plataformas de PLATAFORMAS_SP.
+    Para cada uma, usa gsk search para encontrar leiloes
+    de motos ativos e extrai os lotes.
+    """
+    logf('--- Varredura geral (34 plataformas) ---')
+    total = 0
 
-    # Get price reference (FB or FIPE)
-    preco_ref, ref_type = get_price_ref(model, brand)
-    if preco_ref is None:
-        # Estimate from tier
-        if tier == 1: preco_ref = 15500
-        elif tier == 2: preco_ref = 13000
-        else: preco_ref = 10000
-        ref_type = 'EST'
+    # Pula Sumare e Rico — ja varridos com logica propria
+    pular = {'sumareleiloes', 'ricoleiloes'}
 
-    margem = preco_ref - price
-
-    if margem < margem_min:
-        return None
-
-    score = calculate_score(tier, margem, True, year)
-    if score < SCORE_MINIMO:
-        return None
-
-    lot_id_m = re.search(r'LOTE[:\\_\\s#]*([0-9]{3,5})', block, re.I)
-    lot_id = lot_id_m.group(1) if lot_id_m else 'UNK-' + str(hash(block) % 9999)
-
-    cor_m = re.search(r'COR[:\\s]*([^\\n<,]{3,30})', block, re.I)
-    cor = cor_m.group(1).strip() if cor_m else ''
-
-    return {
-        'id': lot_id,
-        'modelo': model,
-        'marca': brand,
-        'ano': year,
-        'cor': cor,
-        'tier': tier,
-        'tier_name': get_tier_name(tier),
-        'lance_inicial': price,
-        'lance_atual': price,
-        'preco_ref': preco_ref,
-        'price_ref': ref_type,
-        'margem_estimada': margem,
-        'score': score,
-        'documento_ok': True,
-        'leilao': site_key + '_leilao',
-        'url_lote': source_url,
-        'site': site_key,
-        'fonte': 'auto_scout',
+    ativos = {
+        slug: info
+        for slug, info in PLATAFORMAS_SP.items()
+        if info.get('ativo') and slug not in pular
     }
 
-def scout_auction(url, site_key, is_prefeitura_auction=True):
-    log('Scanning: ' + url)
-    html = crawl(url)
-    if not html or len(html) < 200:
-        log('  Pagina vazia')
-        return []
+    logf(f'  {len(ativos)} plataformas para varrer')
 
-    # If not prefeitura, skip
-    if is_prefeitura_auction and not is_prefeitura(html):
-        log('  Nao eh prefeitura/DETRAN - pulando')
-        return []
+    for slug, info in ativos.items():
+        url_base = info['url']
+        leiloeiro = info['leiloeiro']
+        logf(f'  [{slug}] {leiloeiro}: {url_base}')
 
-    found = []
-    lines = html.split('\n')
-    blocks = []
-    current = []
-    for line in lines:
-        if len(line.strip()) > 10:
-            current.append(line)
-        elif current:
-            blocks.append('\n'.join(current))
-            current = []
-    if current:
-        blocks.append('\n'.join(current))
+        urls = buscar_urls_leilao(url_base, slug)
+        if not urls:
+            # Tenta crawl direto na home
+            urls = [url_base]
 
-    for block in blocks:
-        lot = analyze_block(block, url, site_key)
-        if lot:
-            found.append(lot)
-            add_lot(lot)
+        parser = escolher_parser(slug)
 
-    log('  -> ' + str(len(found)) + ' lotes validos')
-    return found
+        for url in urls:
+            html = crawl_url(url, render_js=True)
+            if not html:
+                continue
+            try:
+                lotes = parser(html, url, slug)
+                for l in lotes:
+                    l['site'] = slug  # marca a origem
+                    if add_lote(state, l):
+                        total += 1
+                        notificar_novo(l)
+            except Exception as e:
+                logf(f'    parse erro em {url}: {e}')
+            time.sleep(3)  # respeita o servidor
 
+    logf(f'  Plataformas: {total} lote(s) novo(s)')
+    return total
+
+# ─────────────────────────────────────────────────────────
+# ENTRADA PRINCIPAL
+# ─────────────────────────────────────────────────────────
 def scout_all():
-    log('=== MOTOBD SCOUT ===')
-    results = {}
+    logf('=' * 50)
+    logf('MOTOBID SCOUT — inicio')
+    logf(f'Data/hora: {datetime.now().strftime("%d/%m/%Y %H:%M:%S")}')
+    logf('=' * 50)
 
-    # Sumare - scan all auction pages
-    log('--- Sumare Leiloes ---')
-    r = subprocess.run(['gsk', 'search', 'site:sumareleiloes.com.br/leiloes/'], capture_output=True, text=True, timeout=30)
-    auction_ids = []
-    if r.stdout:
-        try:
-            data = json.loads(r.stdout)
-            for item in data.get('data', {}).get('organic_results', []):
-                link = item.get('link', '')
-                ids = re.findall(r'leiloes?/([0-9]{3,6})', link)
-                auction_ids.extend(ids)
-        except:
-            pass
-    auction_ids = list(dict.fromkeys(auction_ids))[:15]
+    os.makedirs('data', exist_ok=True)
+    state = carregar_json(STATE_FILE, {})
+    antes = len(state)
 
-    log('  Encontrados ' + str(len(auction_ids)) + ' leiloes')
-    for aid in auction_ids:
-        try:
-            url = 'https://www.sumareleiloes.com.br/leiloes/' + aid
-            lots = scout_auction(url, 'sumare')
-            if lots:
-                results['sumare_' + aid] = lots
-        except Exception as e:
-            log('  Erro no ' + aid + ': ' + str(e))
+    # 1. Sumare — IDs conhecidos (mais confiavel)
+    scout_sumare(state)
 
-    # Rico
-    log('--- Rico Leiloes ---')
-    lots = scout_auction('https://www.ricoleiloes.com.br', 'ricoleiloes', is_prefeitura_auction=False)
-    if lots:
-        results['ricoleiloes'] = lots
+    # 2. Rico Leiloes — leiloes agendados
+    scout_rico(state)
 
-    # Hasta SP
-    log('--- Hasta SP ---')
-    lots = scout_auction('https://www.hastasp.com.br', 'hastasp', is_prefeitura_auction=False)
-    if lots:
-        results['hastasp'] = lots
+    # 3. Todas as outras plataformas
+    scout_plataformas(state)
 
-    total = sum(len(v) for v in results.values())
-    log('=== FIM - ' + str(total) + ' lote(s) validos ===')
-    return results
+    # Salva estado atualizado
+    salvar_json(STATE_FILE, state)
+
+    depois  = len(state)
+    novos   = depois - antes
+    logf('=' * 50)
+    logf(f'FIM — {novos} lote(s) novo(s) | {depois} total no sistema')
+    logf('=' * 50)
+
+    # Resumo por email
+    if novos > 0:
+        resumo = '\n'.join(
+            f'- {l["modelo"]} {l["ano"]} | R${l["lance_atual"]:,.0f} | '
+            f'margem R${l["margem_estimada"]:,.0f} | score {l["score"]}'
+            for lid, l in state.items()
+            if l.get('added_at', '').startswith(datetime.now().strftime('%Y-%m-%d'))
+        )
+        enviar_email(
+            f'[MotoBid] Scout: {novos} lote(s) novo(s)',
+            f'Novos lotes encontrados hoje:\n\n{resumo}'
+        )
 
 if __name__ == '__main__':
-    os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
-    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
     scout_all()

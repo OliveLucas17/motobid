@@ -1,222 +1,438 @@
 #!/usr/bin/env python3
-import subprocess, json, os, smtplib
+"""
+monitor.py — MotoBid v2.1
+Verifica lotes ativos e gera dashboard. Roda a cada 15min via cron.
+
+Fluxo:
+  1. Carrega state.json
+  2. Para cada lote nao encerrado, faz crawl e atualiza lance
+  3. Detecta mudanca de fase (pre_leilao -> disputa -> encerrado)
+  4. Dispara alerta se entrou em disputa
+  5. Gera dashboard/index.html atualizado
+"""
+import os
 from datetime import datetime
+from crawlers import crawl_lote
+from utils import log, carregar_json, salvar_json, fmt_brl
+import smtplib
 from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from crawlers import crawl
+from config import EMAIL_TO, ALERTA_VARIACAO_PCT, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
-STATE_FILE = '/home/work/.openclaw/workspace/projects/motobid/data/state.json'
-HISTORY_FILE = '/home/work/.openclaw/workspace/projects/motobid/data/history.json'
-ALERTAS_FILE = '/home/work/.openclaw/workspace/projects/motobid/data/alertas.json'
-LOG_FILE = '/home/work/.openclaw/workspace/projects/motobid/data/monitor.log'
+STATE_FILE   = 'data/state.json'
+HISTORY_FILE = 'data/history.json'
+ALERTAS_FILE = 'data/alertas.json'
+LOG_FILE     = 'data/monitor.log'
+DASHBOARD    = 'dashboard/index.html'
 
-def log(msg):
-    ts = datetime.now().strftime('%d/%m %H:%M')
-    line = '[' + ts + '] ' + msg
-    print(line)
-    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-    with open(LOG_FILE, 'a') as f:
-        f.write(line + '\n')
+def logf(msg):
+    log(msg, LOG_FILE)
 
-def load_state():
-    if os.path.exists(STATE_FILE):
-        try:
-            with open(STATE_FILE) as f:
-                return json.load(f)
-        except:
-            pass
-    return {}
+# ─────────────────────────────────────────────────────────
+# HISTORICO
+# ─────────────────────────────────────────────────────────
+def add_historico(lid, dados):
+    h = carregar_json(HISTORY_FILE, {})
+    if lid not in h:
+        h[lid] = []
+    h[lid].append({'ts': datetime.now().isoformat(), **dados})
+    h[lid] = h[lid][-50:]  # max 50 entradas por lote
+    salvar_json(HISTORY_FILE, h)
 
-def save_state(state):
-    with open(STATE_FILE, 'w') as f:
-        json.dump(state, f, indent=2, ensure_ascii=False)
-
-def load_history():
-    if os.path.exists(HISTORY_FILE):
-        try:
-            with open(HISTORY_FILE) as f:
-                return json.load(f)
-        except:
-            pass
-    return {}
-
-def save_history(history):
-    with open(HISTORY_FILE, 'w') as f:
-        json.dump(history, f, indent=2, ensure_ascii=False)
-
-def add_history(lote_id, data):
-    history = load_history()
-    if lote_id not in history:
-        history[lote_id] = []
-    history[lote_id].append({'ts': datetime.now().isoformat(), **data})
-    history[lote_id] = history[lote_id][-100:]
-    save_history(history)
-
-def alert(lote_id, tipo, msg, lot_data=None):
-    alerts = []
-    if os.path.exists(ALERTAS_FILE):
-        try:
-            with open(ALERTAS_FILE) as f:
-                alerts = json.load(f)
-        except:
-            alerts = []
-    
-    entry = {
-        'id': lote_id + '_' + datetime.now().strftime('%Y%m%d%H%M%S'),
-        'lote_id': lote_id,
-        'tipo': tipo,
-        'msg': msg,
-        'ts': datetime.now().isoformat(),
-        'lance': lot_data.get('lance_atual') if lot_data else None,
+# ─────────────────────────────────────────────────────────
+# ALERTAS
+# ─────────────────────────────────────────────────────────
+def registrar_alerta(lid, tipo, msg, lot=None):
+    alerts = carregar_json(ALERTAS_FILE, [])
+    entry  = {
+        'id':      f'{lid}_{datetime.now().strftime("%Y%m%d%H%M%S")}',
+        'lote_id': lid,
+        'tipo':    tipo,
+        'msg':     msg,
+        'ts':      datetime.now().isoformat(),
+        'lance':   lot.get('lance_atual') if lot else None,
     }
     alerts.insert(0, entry)
-    alerts = alerts[:100]
-    
-    with open(ALERTAS_FILE, 'w') as f:
-        json.dump(alerts, f, indent=2, ensure_ascii=False)
-    
-    send_alert_email(entry)
-    log('ALERTA [' + tipo + '] ' + lote_id + ': ' + msg)
+    salvar_json(ALERTAS_FILE, alerts[:100])
+    enviar_alerta(entry)
+    logf(f'ALERTA [{tipo}] {lid}: {msg}')
 
-def send_alert_email(entry):
+def enviar_alerta(entry):
+    msg  = entry.get('msg', '')
+    subj = f'[MotoBid] {entry.get("tipo","?")} — {entry.get("lote_id","")}'
+    url  = 'https://lucas170804-2e459368-5214-vm.azure.gensparkclaw.com/motobid/'
+    corpo = f'{msg}\n\nVer dashboard: {url}'
+    # Email
     try:
-        msg = MIMEMultipart('alternative')
-        tipo = entry.get('tipo', '')
-        emoji_map = {'disputa': 'FOGO', 'lance_change': 'DOLLAR', 'novo_lote': 'NEW', 'encerrado': 'OK'}
-        tipo_nome = {'disputa': 'Disputa', 'lance_change': 'Lance atualizado', 'novo_lote': 'Novo lote', 'encerrado': 'Encerrado'}
-        emoji = emoji_map.get(tipo, 'BELL')
-        
-        subj = '[' + emoji + '] [MotoBid] ' + tipo_nome.get(tipo, tipo) + ' - ' + entry.get('lote_id', '')
-        body = '[' + datetime.now().strftime('%d/%m %H:%M') + '] ' + entry.get('msg', '') + '\n\nAcesse: https://lucas170804-2e459368-5214-vm.azure.gensparkclaw.com/motobid/\n\n---\nMotoBid - AlfaPrime Transportes\n'
-        
-        msg['Subject'] = subj
-        msg['From'] = 'motobid@alfaemail.com'
-        msg['To'] = 'lucas170804@gmail.com'
-        msg.attach(MIMEText(body, 'plain'))
-        
+        m = MIMEText(corpo, 'plain', 'utf-8')
+        m['Subject'] = subj
+        m['From']    = 'motobid@localhost'
+        m['To']      = EMAIL_TO
         with smtplib.SMTP('localhost', 25, timeout=10) as s:
-            s.sendmail('motobid@alfaemail.com', ['lucas170804@gmail.com'], msg.as_string())
-        log('Email enviado')
-    except Exception as e:
-        log('Erro email: ' + str(e))
-
-def fase_label(fase):
-    labels = {
-        'discovery': 'Descoberta',
-        'pre_leilao': 'Pre-Leilao',
-        'disputa': 'DISPUTA',
-        'encerrado': 'Encerrado',
-    }
-    return labels.get(fase, fase)
-
-def run():
-    os.makedirs('/home/work/.openclaw/workspace/projects/motobid/data', exist_ok=True)
-    log('============================')
-    log('MOTOBD MONITOR')
-    
-    state = load_state()
-    if not state:
-        log('Nenhum lote cadastrado. Rode auto_scout.py primeiro.')
-        return
-    
-    for lote_id, lot in state.items():
-        if lot.get('fase') == 'encerrado':
-            continue
-        
-        log('  ' + lote_id + ': verificando...')
-        
+            s.sendmail('motobid@localhost', [EMAIL_TO], m.as_string())
+    except:
+        pass
+    # Telegram
+    if TELEGRAM_TOKEN and TELEGRAM_CHAT_ID:
         try:
-            data = crawl(lot)
-            add_history(lote_id, data)
-            
-            lance_antigo = lot.get('lance_atual', lot.get('lance_inicial', 0))
-            lance_novo = data.get('lance_atual', lance_antigo)
-            
-            lot['lance_atual'] = lance_novo
-            lot['status'] = data.get('status', lot.get('status'))
-            lot['last_check'] = datetime.now().isoformat()
-            
-            fase_antiga = lot.get('fase', 'pre_leilao')
-            
-            if data.get('status') == 'encerrado':
-                lot['fase'] = 'encerrado'
-                alert(lote_id, 'encerrado', lot.get('modelo', '') + ' encerrou em R$ ' + str(lance_novo), lot)
-            elif lance_novo > lance_antigo * 1.15 and lance_antigo > 0:
-                lot['fase'] = 'disputa'
-                if fase_antiga != 'disputa':
-                    alert(lote_id, 'disputa', lot.get('modelo', '') + ' entrou em DISPUTA! Lance: R$ ' + str(lance_novo), lot)
-                else:
-                    alert(lote_id, 'lance_change', lot.get('modelo', '') + ' nova alta: R$ ' + str(lance_novo), lot)
-            
-            modelo = lot.get('modelo', '?')
-            fase = fase_label(lot.get('fase', '?'))
-            lance_str = 'R$ ' + str(round(lance_novo, 2))
-            log('  ' + lote_id + ' | ' + modelo + ' | fase=' + fase + ' | lance=' + lance_str)
-            
-        except Exception as e:
-            log('  ' + lote_id + ' ERRO: ' + str(e))
-            lot['last_error'] = str(e)
-    
-    save_state(state)
-    generate_dashboard(state)
-    log('OK - ' + str(len(state)) + ' lotes verificados')
-
-def generate_dashboard(state):
-    history = load_history()
-    
-    fase_colors = {
-        'discovery': '#8b5cf6',
-        'pre_leilao': '#3b82f6',
-        'disputa': '#ff6b35',
-        'encerrado': '#10b981',
-    }
-    
-    cards_html = ''
-    for lote_id, lot in state.items():
-        color = fase_colors.get(lot.get('fase', ''), '#888')
-        lance = lot.get('lance_atual', 0)
-        fipe = lot.get('fipe', 0)
-        margem = fipe - lance if fipe else 0
-        score = min(10, round((margem / 5000) * 7, 1)) if margem > 0 else 0
-        
-        price_history = ''
-        if lote_id in history and len(history[lote_id]) > 1:
-            prices = [h.get('lance_atual', 0) for h in history[lote_id] if h.get('lance_atual')]
-            if prices and len(prices) > 1:
-                bars = ''.join(['<div style=\"height:6px;background:' + color + ';width:' + str(round((i+1)/len(prices)*100)) + '%;margin:1px 0;border-radius:2px;opacity:0.6\"></div>' for i in range(len(prices))])
-                price_history = '<div style=\"margin-top:8px;padding:4px 8px;background:#0a0a1a;border-radius:6px\">' + bars + '</div>'
-        
-        url = lot.get('url_lote', '#')
-        cards_html += '<div class=\"card\"><div class=\"card-header\"><span class=\"card-id\">LOTE ' + lote_id.upper() + '</span><span class=\"card-fase\" style=\"background:' + color + ';color:white\">' + fase_label(lot.get('fase', '?')) + '</span></div><div class=\"card-modelo\">' + str(lot.get('modelo', '?')) + ' <span class=\"card-ano\">' + str(lot.get('ano', '')) + '</span></div><div class=\"card-cor\">' + str(lot.get('cor', '')) + ' | ' + str(lot.get('marca', '')) + '</div><div class=\"score-bar\"><div class=\"score-fill\" style=\"width:' + str(int(score*10)) + '%;background:' + color + '\"></div></div><div class=\"score-label\">score ' + str(score) + '/10 | margem R$ ' + str(int(margem)) + '</div><div class=\"metrics\"><div class=\"metric-row\"><span>Lance atual</span><span class=\"val\" style=\"color:' + color + '\">R$ ' + str(round(lance, 2)) + '</span></div><div class=\"metric-row\"><span>FIPE estimado</span><span class=\"val\">R$ ' + str(round(fipe, 2)) + '</span></div><div class=\"metric-row\"><span>Margem</span><span class=\"val green\">R$ ' + str(round(margem, 2)) + '</span></div></div>' + price_history + '<a href=\"' + url + '\" target=\"_blank\" class=\"card-btn\">Ver no Leilao</a></div>'
-    
-    alerts_html = ''
-    if os.path.exists(ALERTAS_FILE):
-        try:
-            with open(ALERTAS_FILE) as f:
-                alerts_data = json.load(f)
-            for a in alerts_data[:5]:
-                ts = a.get('ts', '')[:16]
-                emoji_map = {'disputa': '🔥', 'lance_change': '💰', 'novo_lote': '🆕', 'encerrado': '✅'}
-                e = emoji_map.get(a.get('tipo'), '📢')
-                alerts_html += '<div class=\"alert-item\"><span class=\"alert-ts\">' + ts + '</span> ' + e + ' ' + str(a.get('msg', '')) + '</div>'
+            import urllib.request, urllib.parse
+            url_tg = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
+            data   = urllib.parse.urlencode({
+                'chat_id': TELEGRAM_CHAT_ID,
+                'text':    corpo,
+            }).encode()
+            urllib.request.urlopen(url_tg, data, timeout=10)
         except:
             pass
-    
-    discovery = sum(1 for v in state.values() if v.get('fase') == 'discovery')
-    pre_leilao = sum(1 for v in state.values() if v.get('fase') == 'pre_leilao')
-    disputa = sum(1 for v in state.values() if v.get('fase') == 'disputa')
-    encerrado = sum(1 for v in state.values() if v.get('fase') == 'encerrado')
+
+# ─────────────────────────────────────────────────────────
+# MONITOR PRINCIPAL
+# ─────────────────────────────────────────────────────────
+def run():
+    os.makedirs('data', exist_ok=True)
+    os.makedirs('dashboard', exist_ok=True)
+    logf('==== MONITOR ====')
     now = datetime.now().strftime('%d/%m/%Y %H:%M')
-    
-    html = '<!DOCTYPE html><html lang=\"pt-BR\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\"><title>MotoBid</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,-apple-system,sans-serif;background:#0a0a1a;color:#e0e0e0;min-height:100vh}.header{background:linear-gradient(135deg,#ff6b35,#1a1a2e);padding:22px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}.logo{font-size:26pt;font-weight:900;color:white}.logo span{color:#ff6b35}.logo small{font-size:10pt;color:rgba(255,255,255,0.6);font-weight:400;display:block;margin-top:2px}.header-right{text-align:right}.time{font-size:11pt;color:rgba(255,255,255,0.7)}.status{font-size:10pt;color:#10b981;font-weight:600;margin-top:2px}.content{padding:24px 36px;max-width:1300px;margin:0 auto}.fases-bar{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}.fase-chip{padding:7px 16px;border-radius:20px;font-size:11pt;font-weight:600}.fase-discovery{background:#2d1f6b;color:#a78bfa}.fase-pre_leilao{background:#1e3a6b;color:#60a5fa}.fase-disputa{background:#3d1a00;color:#ff6b35}.fase-encerrado{background:#0d2d1d;color:#34d399}.section-title{font-size:11pt;color:#666;margin-bottom:14px;margin-top:26px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #1e2a4a;padding-bottom:8px}.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}.card{background:#12122a;border-radius:14px;padding:20px;border:1.5px solid #1e2a4a;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#ff6b35}.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.card-id{font-size:9pt;color:#ff6b35;font-weight:700;text-transform:uppercase;letter-spacing:1px}.card-fase{font-size:9pt;font-weight:700;padding:3px 10px;border-radius:10px}.card-modelo{font-size:15pt;font-weight:800;color:white}.card-ano{font-weight:400;color:#888;font-size:12pt}.card-cor{font-size:11pt;color:#555;margin-top:3px}.score-bar{height:4px;background:#1e2a4a;border-radius:3px;margin:12px 0 6px;overflow:hidden}.score-fill{height:100%;border-radius:3px;transition:width .5s}.score-label{font-size:10pt;color:#666;margin-bottom:10px}.metrics{border-top:1px solid #1e2a4a;padding-top:10px}.metric-row{display:flex;justify-content:space-between;padding:5px 0;font-size:11pt}.metric-row span:first-child{color:#555}.metric-row .val{font-weight:700;color:white}.metric-row .val.green{color:#10b981}.card-btn{display:block;text-align:center;margin-top:14px;padding:9px;background:#1e2a4a;color:#60a5fa;border-radius:8px;text-decoration:none;font-size:10pt;font-weight:600}.card-btn:hover{background:#ff6b35;color:white}.alerts{background:#12122a;border-radius:12px;padding:16px 20px;margin-top:4px}.alert-item{padding:8px 0;border-bottom:1px solid #1e2a4a;font-size:11pt}.alert-item:last-child{border:none}.alert-ts{color:#555;font-size:10pt;margin-right:8px}.scout-banner{background:linear-gradient(135deg,#1e3a2a,#0a1a1a);border:1px solid #10b981;border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}.scout-banner .badge{background:#10b981;color:white;padding:4px 12px;border-radius:10px;font-size:10pt;font-weight:700;white-space:nowrap}.scout-banner p{color:#888;font-size:12pt;flex:1}.scout-banner strong{color:#10b981}.footer{text-align:center;padding:20px;font-size:10pt;color:#333;border-top:1px solid #1e2a4a;margin-top:30px}@media(max-width:700px){.header{padding:16px 20px}.content{padding:16px 20px}}</style></head><body><div class=header><div class=logo>Moto<span>Bid</span><small>alerta inteligente | AlfaPrime Transportes</small></div><div class=header-right><div class=time>' + now + '</div><div class=status>● Monitor ativo</div></div></div><div class=content><div class=scout-banner><span class=badge>SCOUT ATIVO</span><p>Auto-scout a cada 6h. <strong>Prefeitura Itaoca</strong> - Leilao 09/06/2026. Filtro: SEM Honda/Yamaha/Shineray, COM documento, margem &gt;R$3k.</p></div><div class=fases-bar><div class=fase-chip fase-discovery>Descoberta (' + str(discovery) + ')</div><div class=fase-chip fase-pre_leilao>Pre-Leilao (' + str(pre_leilao) + ')</div><div class=fase-chip fase-disputa>DISPUTA (' + str(disputa) + ')</div><div class=fase-chip fase-encerrado>Encerrado (' + str(encerrado) + ')</div></div><div class=section-title>Lotes monitorados (' + str(len(state)) + ')</div><div class=card-grid>' + (cards_html if cards_html else '<p style=color:#555;font-size:12pt;padding:20px 0>Nenhum lote. Rode auto_scout.py para comecar.</p>') + '</div><div class=section-title>Ultimos alertas</div><div class=alerts>' + (alerts_html if alerts_html else '<p style=color:#444;font-size:11pt;padding:10px 0>Nenhum alerta ainda.</p>') + '</div></div><div class=footer>MotoBid | AlfaPrime Transportes | Atualiza a cada 15 min</div></body></html>'
-    
-    out = '/home/work/.openclaw/workspace/projects/motobid/dashboard/index.html'
-    with open(out, 'w') as f:
+    state = carregar_json(STATE_FILE, {})
+
+    if not state:
+        logf('Nenhum lote. Rode auto_scout.py primeiro.')
+        gerar_dashboard(state)
+        return
+
+    for lid, lot in state.items():
+        if lot.get('fase') == 'encerrado':
+            continue
+
+        logf(f'  {lid}: verificando...')
+        try:
+            dados      = crawl_lote(lot)
+            lance_ant  = lot.get('lance_atual', lot.get('lance_inicial', 0))
+            lance_novo = dados.get('lance_atual', lance_ant)
+
+            add_historico(lid, dados)
+
+            lot['lance_atual'] = lance_novo
+            lot['last_check']  = datetime.now().isoformat()
+            lot['crawl_ok']    = dados.get('crawl_ok', False)
+
+            # Encerrado?
+            if dados.get('status') == 'encerrado':
+                lot['fase'] = 'encerrado'
+                registrar_alerta(
+                    lid, 'encerrado',
+                    f'{lot.get("modelo","")} encerrou — lance final {fmt_brl(lance_novo)}',
+                    lot
+                )
+
+            # Entrou em disputa?
+            elif lance_ant > 0 and lance_novo > lance_ant * (1 + ALERTA_VARIACAO_PCT / 100):
+                fase_ant   = lot.get('fase')
+                lot['fase'] = 'disputa'
+                if fase_ant != 'disputa':
+                    registrar_alerta(
+                        lid, 'disputa',
+                        f'🔥 {lot.get("modelo","")} entrou em DISPUTA!\n'
+                        f'Lance: {fmt_brl(lance_novo)} (era {fmt_brl(lance_ant)})',
+                        lot
+                    )
+
+            logf(f'  {lid} | {lot.get("modelo","?")} | '
+                 f'{lot.get("fase","?")} | {fmt_brl(lance_novo)}')
+
+        except Exception as e:
+            logf(f'  {lid} ERRO: {e}')
+            lot['last_error'] = str(e)
+
+    salvar_json(STATE_FILE, state)
+    gerar_dashboard(state)
+    logf(f'OK — {len(state)} lotes verificados')
+
+# ─────────────────────────────────────────────────────────
+# DASHBOARD
+# ─────────────────────────────────────────────────────────
+def gerar_dashboard(state):
+    now     = datetime.now().strftime('%d/%m/%Y %H:%M')
+    alertas = carregar_json(ALERTAS_FILE, [])
+    history = carregar_json(HISTORY_FILE, {})
+
+    def lotes_cat(cat):
+        return {
+            k: v for k, v in state.items()
+            if v.get('categoria', 'prefeitura') == cat
+            and v.get('fase') != 'encerrado'
+        }
+
+    pref = lotes_cat('prefeitura')
+    fin  = lotes_cat('financeira')
+    sin  = lotes_cat('sinistro')
+
+    def sparkline(lid):
+        hist = history.get(lid, [])
+        vals = [h.get('lance_atual', 0) for h in hist[-8:] if h.get('lance_atual')]
+        if len(vals) < 2:
+            return ''
+        mx = max(vals) or 1
+        bars = ''.join(
+            f'<div style="width:5px;background:#ff5500;height:{max(3,int(v/mx*20))}px;'
+            f'border-radius:2px;opacity:.7"></div>'
+            for v in vals
+        )
+        return f'<div style="display:flex;align-items:flex-end;gap:2px;margin-top:8px;height:22px">{bars}</div>'
+
+    def cards_html(lotes):
+        if not lotes:
+            return '<div style="color:#aaa;padding:24px;font-size:13px;text-align:center;">Nenhum lote nesta categoria ainda.</div>'
+        html = '<div class="cards">'
+        for lid, l in sorted(lotes.items(), key=lambda x: -x[1].get('score', 0)):
+            lance  = l.get('lance_atual', 0)
+            fipe   = l.get('fipe', 0)
+            margem = l.get('margem_estimada', fipe - lance if fipe else 0)
+            pct    = round((margem / fipe) * 100) if fipe else 0
+            score  = l.get('score', 0)
+            fase   = l.get('fase', 'pre_leilao')
+            hi     = 'hi' if score >= 8.5 else ''
+            fase_lbl = {
+                'pre_leilao': 'Pré-leilão',
+                'disputa':    'Disputa',
+                'discovery':  'Discovery',
+            }.get(fase, fase)
+            fase_cls = 'ph-dis' if fase == 'disputa' else 'ph-pre'
+            dbadge = (
+                f'<div class="dbadge">{l.get("sinistro_tipo","Pequena monta")}</div>'
+                if l.get('categoria') == 'sinistro' else ''
+            )
+            crawl_warn = (
+                '<span style="color:#f59e0b;font-size:9px;"> ⚠ sem atualização</span>'
+                if not l.get('crawl_ok') else ''
+            )
+            html += f"""
+            <div class="card {hi}">
+              <div class="ch">
+                <div class="cid">LOTE {lid} · {str(l.get('leilao','?')).upper()}</div>
+                <div class="cmod">{l.get('modelo','?')}</div>
+                <div class="csub">
+                  <span>{l.get('ano','')} · {l.get('cor','')} · Doc ✓</span>
+                  <span class="ph {fase_cls}">{fase_lbl}</span>
+                </div>
+                {dbadge}
+              </div>
+              <div class="cb">
+                <div class="sr">
+                  <span class="sl">Score{crawl_warn}</span>
+                  <span class="sv">{score}</span>
+                </div>
+                <div class="bb"><div class="bf" style="width:{score*10}%"></div></div>
+                <div class="mets">
+                  <div class="met"><div class="ml">Lance</div><div class="mv">R${int(lance):,}</div></div>
+                  <div class="met"><div class="ml">FIPE est.</div><div class="mv">R${int(fipe):,}</div></div>
+                  <div class="met"><div class="ml">Margem</div><div class="mv g">R${int(margem):,}</div></div>
+                  <div class="met"><div class="ml">% FIPE</div><div class="mv o">{pct}%</div></div>
+                </div>
+                {sparkline(lid)}
+              </div>
+              <div class="cf">
+                <span class="cplt">{l.get('site','?').upper()}</span>
+                <a href="{l.get('url_lote','#')}" target="_blank" class="clnk">Ver lote ↗</a>
+              </div>
+            </div>"""
+        html += '</div>'
+        return html
+
+    al_html = ''
+    for a in alertas[:5]:
+        ic = {'disputa':'🔥','encerrado':'✓','novo_lote':'★'}.get(a.get('tipo',''), '•')
+        al_html += (
+            f'<div class="al-item">'
+            f'<span class="al-ts">{a.get("ts","")[:16]}</span> '
+            f'{ic} {a.get("msg","")}'
+            f'</div>'
+        )
+    if not al_html:
+        al_html = '<div style="color:#aaa;padding:10px;font-size:12px;">Nenhum alerta ainda.</div>'
+
+    tot    = sum(1 for v in state.values() if v.get('fase') != 'encerrado')
+    margem = sum(v.get('margem_estimada', 0) for v in state.values() if v.get('fase') != 'encerrado')
+    disp   = sum(1 for v in state.values() if v.get('fase') == 'disputa')
+    avg_sc = round(sum(v.get('score', 0) for v in state.values() if v.get('fase') != 'encerrado') / max(tot, 1), 1)
+
+    html = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="refresh" content="900">
+<title>MotoBid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{{box-sizing:border-box;margin:0;padding:0;}}
+body{{background:#f5f4f0;font-family:'Barlow',sans-serif;color:#1a1a1a;min-height:100vh;}}
+.top{{background:#fff;border-bottom:1px solid #e8e6e0;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}}
+.logo-wrap{{display:flex;align-items:center;gap:11px;}}
+.logo-box{{width:38px;height:38px;background:#ff5500;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;}}
+.logo-text{{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#1a1a1a;letter-spacing:-.01em;}}
+.logo-text span{{color:#ff5500;}}
+.logo-sub{{font-size:10px;color:#aaa;font-family:'JetBrains Mono',monospace;margin-top:1px;}}
+.top-right{{font-size:11px;color:#aaa;font-family:'JetBrains Mono',monospace;text-align:right;}}
+.kpis{{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e8e6e0;}}
+.kpi{{background:#fff;padding:14px 20px;}}
+.kpi-l{{font-size:10px;color:#aaa;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}}
+.kpi-v{{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#1a1a1a;}}
+.kpi-s{{font-size:10px;margin-top:3px;color:#ff5500;font-weight:600;}}
+.kpi-sn{{color:#aaa!important;}}
+.scout{{background:#fff7f3;border-bottom:1px solid #fde0d0;padding:10px 24px;display:flex;align-items:center;gap:10px;font-size:12px;color:#888;}}
+.pulse{{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;flex-shrink:0;animation:pp 2s ease-in-out infinite;}}
+@keyframes pp{{0%,100%{{opacity:1}}50%{{opacity:.3}}}}
+.tabs{{display:flex;background:#fff;border-bottom:1px solid #e8e6e0;padding:0 24px;}}
+.tab{{padding:12px 18px;font-size:12px;font-weight:700;cursor:pointer;color:#aaa;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.03em;transition:all .15s;user-select:none;}}
+.tab:hover{{color:#666;}}
+.tab.on{{color:#ff5500;border-bottom-color:#ff5500;}}
+.tct{{font-size:10px;background:#f0ede8;color:#999;padding:1px 7px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-weight:400;}}
+.tab.on .tct{{background:#fff0e8;color:#ff5500;}}
+.content{{padding:20px 24px;background:#f5f4f0;min-height:60vh;}}
+.panel{{display:none;}}.panel.on{{display:block;}}
+.sec-hd{{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}}
+.sec-title{{display:flex;align-items:center;gap:10px;}}
+.cat-badge{{font-size:10px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase;}}
+.cb-p{{background:#dcfce7;color:#15803d;}}
+.cb-f{{background:#dbeafe;color:#1d4ed8;}}
+.cb-s{{background:#fef9c3;color:#a16207;}}
+.sec-sub{{font-size:11px;color:#aaa;font-family:'JetBrains Mono',monospace;}}
+.cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:8px;}}
+.card{{background:#fff;border:1px solid #e8e6e0;border-radius:10px;overflow:hidden;transition:border-color .15s,transform .15s;}}
+.card:hover{{border-color:#ffb899;transform:translateY(-1px);}}
+.card.hi{{border-left:3px solid #ff5500;border-color:#ffd4be;}}
+.ch{{padding:12px 13px 10px;border-bottom:1px solid #f0ede8;}}
+.cid{{font-size:9px;color:#bbb;font-family:'JetBrains Mono',monospace;margin-bottom:4px;}}
+.cmod{{font-size:14px;font-weight:700;color:#1a1a1a;line-height:1.2;}}
+.csub{{font-size:10px;color:#999;margin-top:3px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:3px;}}
+.ph{{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;}}
+.ph-pre{{background:#fef9c3;color:#a16207;}}
+.ph-dis{{background:#fee2e2;color:#dc2626;}}
+.dbadge{{font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;background:#fef3c7;color:#d97706;text-transform:uppercase;display:inline-block;margin-top:4px;}}
+.cb{{padding:12px 13px;}}
+.sr{{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;}}
+.sl{{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.04em;font-weight:600;}}
+.sv{{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#ff5500;}}
+.bb{{height:2px;background:#f0ede8;border-radius:2px;margin-bottom:11px;}}
+.bf{{height:2px;border-radius:2px;background:#ff5500;}}
+.mets{{display:grid;grid-template-columns:1fr 1fr;gap:6px;}}
+.met{{background:#f8f7f4;border-radius:6px;padding:7px 9px;}}
+.ml{{font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px;}}
+.mv{{font-size:12px;font-weight:700;color:#1a1a1a;}}
+.mv.g{{color:#16a34a;}}.mv.o{{color:#ff5500;}}
+.cf{{padding:9px 13px;border-top:1px solid #f0ede8;display:flex;justify-content:space-between;align-items:center;}}
+.cplt{{font-size:10px;color:#bbb;font-family:'JetBrains Mono',monospace;}}
+.clnk{{font-size:10px;color:#ff5500;font-weight:600;text-decoration:none;}}
+.clnk:hover{{text-decoration:underline;}}
+.alerts-box{{background:#fff;border:1px solid #e8e6e0;border-radius:10px;padding:14px 16px;margin-top:20px;}}
+.al-sec{{font-size:10px;color:#aaa;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}}
+.al-item{{padding:7px 0;border-bottom:1px solid #f0ede8;font-size:12px;color:#555;line-height:1.5;}}
+.al-item:last-child{{border:none;}}
+.al-ts{{color:#bbb;font-size:10px;font-family:'JetBrains Mono',monospace;margin-right:6px;}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo-wrap">
+    <div class="logo-box">🏍</div>
+    <div>
+      <div class="logo-text">MOTO<span>BID</span></div>
+      <div class="logo-sub">by minduca · monitor de leilões</div>
+    </div>
+  </div>
+  <div class="top-right">
+    {now}<br>
+    atualiza em 15min
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi">
+    <div class="kpi-l">Monitorados</div>
+    <div class="kpi-v">{tot}</div>
+    <div class="kpi-s">lotes ativos</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Margem total</div>
+    <div class="kpi-v">R${int(margem/1000)}k</div>
+    <div class="kpi-s">estimada</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Em disputa</div>
+    <div class="kpi-v">{disp}</div>
+    <div class="kpi-s {'kpi-sn' if disp == 0 else ''}">{'● ativo agora' if disp > 0 else 'monitorando'}</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">Score médio</div>
+    <div class="kpi-v">{avg_sc}</div>
+    <div class="kpi-s kpi-sn">qualidade geral</div>
+  </div>
+</div>
+
+<div class="scout">
+  <div class="pulse"></div>
+  <span>
+    Sistema ativo · scout diário 07:00 · monitor a cada 15min ·
+    <b style="color:#1a1a1a">{len(state)}</b> lotes no sistema ·
+    <b style="color:#1a1a1a">34</b> plataformas monitoradas
+  </span>
+</div>
+
+<div class="tabs">
+  <div class="tab on" onclick="sw(this,'p')">🏛 Prefeitura <span class="tct">{len(pref)}</span></div>
+  <div class="tab" onclick="sw(this,'f')">🏦 Financiamento <span class="tct">{len(fin)}</span></div>
+  <div class="tab" onclick="sw(this,'s')">🔧 Sinistro <span class="tct">{len(sin)}</span></div>
+</div>
+
+<div class="content">
+  <div class="panel on" id="pp">
+    <div class="sec-hd">
+      <div class="sec-title">
+        <span class="cat-badge cb-p">🏛 Prefeitura</span>
+        <span class="sec-sub">lance R$500–R$6k · doc obrigatório</span>
+      </div>
+    </div>
+    {cards_html(pref)}
+  </div>
+  <div class="panel" id="pf">
+    <div class="sec-hd">
+      <div class="sec-title">
+        <span class="cat-badge cb-f">🏦 Financiamento</span>
+        <span class="sec-sub">lance R$5k–R$25k · recuperação de crédito</span>
+      </div>
+    </div>
+    {cards_html(fin)}
+  </div>
+  <div class="panel" id="ps">
+    <div class="sec-hd">
+      <div class="sec-title">
+        <span class="cat-badge cb-s">🔧 Sinistro</span>
+        <span class="sec-sub">só pequena monta · doc obrigatório · margem mín. R$3.500</span>
+      </div>
+    </div>
+    {cards_html(sin)}
+  </div>
+  <div class="alerts-box">
+    <div class="al-sec">Últimos alertas</div>
+    {al_html}
+  </div>
+</div>
+
+<script>
+function sw(el,p){{
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('p'+p).classList.add('on');
+}}
+</script>
+</body>
+</html>"""
+
+    with open(DASHBOARD, 'w', encoding='utf-8') as f:
         f.write(html)
-    
-    os.makedirs('/home/work/.openclaw/workspace/projects/motobid/dashboard', exist_ok=True)
-    with open('/home/work/.openclaw/workspace/projects/motobid/dashboard/index.html', 'w') as f:
-        f.write(html)
+    logf(f'Dashboard gerado: {DASHBOARD}')
 
 if __name__ == '__main__':
-    run()
+    run()   

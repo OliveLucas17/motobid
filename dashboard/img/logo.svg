@@ -1,0 +1,32 @@
+<svg xmlns=http://www.w3.org/2000/svg viewBox=0 0 200 200 width=200 height=200>
+  <!-- Background circle -->
+  <circle cx=100 cy=100 r=95 fill=#0a0a1a />
+  
+  <!-- Wheel (motorcycle wheel with spokes) -->
+  <circle cx=100 cy=100 r=65 fill=none stroke=#FF6B35 stroke-width=8 />
+  <circle cx=100 cy=100 r=55 fill=none stroke=#FF6B35 stroke-width=3 />
+  <circle cx=100 cy=100 r=15 fill=#FF6B35 />
+  <!-- Spokes -->
+  <line x1=100 y1=45 x2=100 y2=85 stroke=#FF6B35 stroke-width=5 stroke-linecap=round />
+  <line x1=100 y1=115 x2=100 y2=155 stroke=#FF6B35 stroke-width=5 stroke-linecap=round />
+  <line x1=55 y1=80 x2=85 y2=90 stroke=#FF6B35 stroke-width=4 stroke-linecap=round />
+  <line x1=145 y1=80 x2=115 y2=90 stroke=#FF6B35 stroke-width=4 stroke-linecap=round />
+  <line x1=65 y1=130 x2=88 y2=107 stroke=#FF6B35 stroke-width=4 stroke-linecap=round />
+  <line x1=135 y1=130 x2=112 y2=107 stroke=#FF6B35 stroke-width=4 stroke-linecap=round />
+  
+  <!-- Gavel (hammer) integrated at angle -->
+  <!-- Hammer handle -->
+  <line x1=155 y1=45 x2=95 y2=115 stroke=#FFFFFF stroke-width=9 stroke-linecap=round />
+  <line x1=155 y1=45 x2=95 y2=115 stroke=#FF6B35 stroke-width=6 stroke-linecap=round />
+  <!-- Hammer head -->
+  <rect x=145 y=25 width=28 height=22 rx=4 fill=#FFFFFF transform=rotate(-35 159 36) />
+  <rect x=147 y=27 width=24 height=18 rx=3 fill=#FF6B35 transform=rotate(-35 159 36) />
+  
+  <!-- Target crosshair overlay on wheel -->
+  <circle cx=100 cy=100 r=30 fill=none stroke=#FFFFFF stroke-width=2 stroke-dasharray=6 4 opacity=0.7 />
+  <circle cx=100 cy=100 r=5 fill=#FF6B35 />
+  
+  <!-- Accent dots -->
+  <circle cx=55 cy=55 r=4 fill=#FF6B35 opacity=0.6 />
+  <circle cx=145 cy=155 r=4 fill=#FF6B35 opacity=0.6 />
+</svg>
